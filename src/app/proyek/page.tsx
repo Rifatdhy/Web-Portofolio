@@ -18,7 +18,7 @@ export default function ProyekPage() {
       : projects.filter((p) => p.techs.includes(active));
 
   return (
-    <div className="pt-28 md:pt-36 pb-24 md:pb-32">
+    <div className="pt-20 md:pt-24 pb-24 md:pb-32">
       <div className="max-w-6xl mx-auto px-6">
         <div className="mb-12 md:mb-16 flex flex-col gap-2">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted">
@@ -34,7 +34,8 @@ export default function ProyekPage() {
             <button
               key={f}
               onClick={() => setActive(f)}
-              className="px-4 py-2 text-xs font-medium rounded-full border transition-all duration-200 cursor-pointer"
+              aria-pressed={active === f}
+              className="px-4 min-h-[44px] text-xs font-medium rounded-full border transition-all duration-200 cursor-pointer"
               style={{
                 background:
                   active === f ? "var(--color-text-primary)" : "transparent",
@@ -58,6 +59,12 @@ export default function ProyekPage() {
             <p className="text-lg text-muted">
               Tidak ada proyek dengan filter tersebut.
             </p>
+            <button
+              onClick={() => setActive("Semua")}
+              className="btn btn-outline mt-6"
+            >
+              Reset filter
+            </button>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-6">

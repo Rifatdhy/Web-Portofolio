@@ -17,7 +17,7 @@ export function Projects() {
       : projects.filter((p) => p.techs.includes(active));
 
   return (
-    <section id="proyek" className="py-28 md:py-32 bg-radial-soft">
+    <section id="proyek" className="pt-20 pb-36 md:pt-24 md:pb-44">
       <div className="max-w-6xl mx-auto px-6">
           <Reveal>
           <div className="mb-12 md:mb-16 flex flex-col gap-2">
@@ -38,6 +38,7 @@ export function Projects() {
               <button
                 key={f}
                 onClick={() => setActive(f)}
+                aria-pressed={active === f}
                 className={`badge transition-all duration-200 cursor-pointer ${
                   active === f
                     ? "bg-[var(--color-text-primary)] text-[var(--color-surface)] shadow-sm"
@@ -55,6 +56,12 @@ export function Projects() {
             <p className="text-lg text-muted">
               Tidak ada proyek dengan filter tersebut.
             </p>
+            <button
+              onClick={() => setActive("Semua")}
+              className="btn btn-outline mt-6"
+            >
+              Reset filter
+            </button>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-6">

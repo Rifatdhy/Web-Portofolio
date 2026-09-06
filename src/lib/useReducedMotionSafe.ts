@@ -1,15 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useReducedMotion } from "motion/react";
+
+const emptySubscribe = () => () => {};
 
 export function useReducedMotionSafe(): boolean {
   const reduce = useReducedMotion();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  return mounted ? Boolean(reduce) : false;
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => Boolean(reduce),
+    () => false
+  );
 }

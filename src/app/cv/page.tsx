@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { SITE, SOCIAL } from "@/lib/constants";
 import { about, education, experiences, projects, skillCategories } from "@/lib/data";
 import {
@@ -7,9 +8,14 @@ import {
   GithubLogo,
 } from "@phosphor-icons/react/ssr";
 
+export const metadata: Metadata = {
+  title: `Curriculum Vitae | ${SITE.name}`,
+  description: `CV ${SITE.name} — ${SITE.title}. Pendidikan, pengalaman, keahlian, dan proyek.`,
+};
+
 export default function CVPage() {
   return (
-    <div className="pt-28 md:pt-32 pb-24 md:pb-32">
+    <div className="pt-20 md:pt-24 pb-24 md:pb-32">
       <div className="max-w-4xl mx-auto px-6">
         <div className="mb-12 flex flex-col gap-2">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted">
@@ -48,7 +54,7 @@ export default function CVPage() {
             {[
               { href: SOCIAL.whatsapp, label: "WhatsApp", value: SITE.phone, icon: <WhatsappLogo aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
               { href: SITE.emailCompose, label: "Email", value: SITE.email, icon: <At aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
-              { href: "/assets/CV Rifat.pdf", label: "Download CV", value: "PDF — Rifat Dhiya Ul Lail", icon: <FilePdf aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
+              { href: "/assets/CV Rifat.pdf", label: "Download CV", value: "PDF, Rifat Dhiya Ul Lail", icon: <FilePdf aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
               { href: SOCIAL.github, label: "GitHub", value: "@Rifatdhy", icon: <GithubLogo aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
             ].map((item) => (
               <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="cv-card">
@@ -75,7 +81,7 @@ export default function CVPage() {
                 <div key={edu.school}>
                   <h4 className="font-semibold">{edu.school}</h4>
                   <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
-                    {edu.degree} — {edu.period}
+                    {edu.degree} · {edu.period}
                   </p>
                   {edu.info && (
                     <p className="text-sm" style={{ color: "var(--color-text-muted)" }}>

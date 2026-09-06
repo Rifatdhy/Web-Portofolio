@@ -29,7 +29,7 @@ export function Contact() {
               className="mt-6 leading-relaxed max-w-md mx-auto text-secondary"
             >
               Terbuka untuk diskusi, kolaborasi, atau sekadar mengobrol
-              seputar teknologi &mdash; pengembangan web, aplikasi desktop dan
+              seputar teknologi: pengembangan web, aplikasi desktop dan
               mobile, jaringan, hingga IT support.
             </p>
           </div>
@@ -115,7 +115,7 @@ export function Contact() {
                   <span
                     className="block text-xs truncate text-secondary"
                   >
-                    PDF &mdash; Rifat Dhiya Ul Lail
+                    PDF &middot; Rifat Dhiya Ul Lail
                   </span>
                 </div>
                 <ArrowUpRight

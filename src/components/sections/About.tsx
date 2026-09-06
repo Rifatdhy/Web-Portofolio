@@ -7,20 +7,17 @@ import { Reveal } from "../magic/Reveal";
 export function About() {
   const items = [
     { num: "2+", label: "Tahun Eksplorasi Web" },
-    { num: "3+", label: "Project Publik" },
+    { num: "5", label: "Project Publik" },
     { num: "S1", label: "Teknik Informatika" },
   ];
 
   return (
-    <section id="tentang" className="pt-28 pb-36 md:pt-32 md:pb-40 bg-radial-soft">
+    <section id="tentang" className="pt-20 pb-36 md:pt-24 md:pb-40 section-rule">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-12 gap-10 md:gap-16">
           <div className="md:col-span-5">
             <Reveal>
               <div className="flex flex-col gap-2">
-                <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted">
-                  Profile
-                </span>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-tight text-balance">
                   Siapa di balik layar.
                 </h2>
@@ -28,8 +25,9 @@ export function About() {
                   className="text-sm mt-6 leading-relaxed font-mono"
                   style={{ color: "var(--color-text-secondary)" }}
                 >
-                  {SITE.location} &middot; {SITE.major} &middot; Angkatan{" "}
-                  {SITE.batch}
+                  {SITE.location} &middot; {SITE.major}
+                  <br />
+                  Angkatan {SITE.batch}
                 </p>
               </div>
             </Reveal>
@@ -148,6 +146,14 @@ export function About() {
                         >
                           {edu.degree}
                         </p>
+                        {edu.info && (
+                          <p
+                            className="text-sm mt-2"
+                            style={{ color: "var(--color-text-muted)" }}
+                          >
+                            {edu.info}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>

@@ -1,94 +1,77 @@
 # Design Spec — Rifat Dhiya Ul Lail Portfolio v2
 
+> Revisi: fitur blog, testimoni, contact form/API, visitor counter, dan custom cursor dihapus (Juni 2026). Palet di-update ke monokrom Apple-like. Light mode + theme toggle dihapus — dark-only (Sep 2026).
+
 ## Overview
-Rebuild portfolio dari static HTML ke Next.js 15 (App Router) dengan palet monokrom warm gray, dark mode otomatis, ditambah blog, CV online, testimoni, filter proyek, lightbox, contact form backend, dan analytics.
+Portfolio Next.js 16 (App Router) dengan palet monokrom Apple-like dark-only, halaman CV online, halaman daftar proyek dengan filter, dan analytics.
 
 ## Design Read
-Portfolio developer untuk recruiter technical & freelance client, dengan bahasa monokrom warm-gray editorial, desain tanpa accent color — hierarki dibawa oleh tipografi, spacing, dan kontras.
+Portfolio developer untuk recruiter technical & freelance client, dengan bahasa monokrom tanpa accent color — hierarki dibawa oleh tipografi, spacing, dan kontras.
 
 ## Tech Stack
 | Layer | Pilihan |
 |-------|---------|
-| Framework | Next.js 15 + TypeScript |
-| Styling | Tailwind CSS v4 |
-| Animation | Motion (motion/react) |
+| Framework | Next.js 16 + TypeScript (strict) |
+| Styling | Tailwind CSS v4 (+ CSS custom `globals.css`) |
+| Animation | Motion (`motion/react`), guarded `useReducedMotionSafe()` |
 | Icons | @phosphor-icons/react |
-| Blog | next-mdx-remote + MDX |
-| Email | Resend SDK |
-| Analytics | Vercel Analytics |
-| Dark Mode | prefers-color-scheme via CSS variables |
+| Skill icons | Local SVG `public/icons/*.svg` |
+| Analytics | Vercel Analytics + Speed Insights |
+| Theme | Dark-only, tanpa toggle |
 | Fonts | next/font (Outfit, DM Sans, JetBrains Mono) |
+| Test | Vitest (`npm test`), data integrity |
+| CI | GitHub Actions: lint → typecheck → test → audit → build |
 
-## Three Dials
-- DESIGN_VARIANCE: 6
-- MOTION_INTENSITY: 5
-- VISUAL_DENSITY: 4
+## Color Tokens (Apple-like Monochrome, zero accent, dark-only)
 
-## Color Tokens (Warm Gray Monochrome)
-
-### Light Mode
 | Token | Value |
 |-------|-------|
-| --surface | #FAF9F7 |
-| --surface-alt | #F0EFED |
-| --surface-card | #FFFFFF |
-| --border | #E5E3E0 |
-| --border-hover | #D4D2CE |
-| --text-primary | #1A1918 |
-| --text-secondary | #8A8782 |
-| --text-muted | #B8B5B0 |
+| --color-surface | #0b0b0d |
+| --color-surface-alt | #141418 |
+| --color-surface-card | #15151a |
+| --color-border | #26262c |
+| --color-border-hover | #3a3a42 |
+| --color-text-primary | #f5f5f7 |
+| --color-text-secondary | #a1a1a6 |
+| --color-text-muted | #8a8a91 |
 
-### Dark Mode
-| Token | Value |
-|-------|-------|
-| --surface | #1A1918 |
-| --surface-alt | #2E2C2A |
-| --surface-card | #2E2C2A |
-| --border | #4A4845 |
-| --border-hover | #6B6864 |
-| --text-primary | #FAF9F7 |
-| --text-secondary | #B8B5B0 |
-| --text-muted | #8A8782 |
-
-Zero accent color. Hierarki visual dari weight, scale, spacing, dan contrast.
+CTA primer menggunakan warna inverted: bg `--color-text-primary`, teks `--color-surface`.
 
 ## Route Structure
 | Route | File | Konten |
 |-------|------|--------|
-| `/` | app/page.tsx | Hero -> About -> Projects -> Testimonials -> Skills -> Contact |
-| `/blog` | app/blog/page.tsx | List blog posts |
-| `/blog/[slug]` | app/blog/[slug]/page.tsx | Single blog post (MDX) |
-| `/proyek` | app/proyek/page.tsx | Full project list + filter |
-| `/cv` | app/cv/page.tsx | Online CV |
-| `/api/contact` | app/api/contact/route.ts | Form -> Resend |
-| `/api/views` | app/api/views/route.ts | Visitor counter |
+| `/` | app/page.tsx | Hero → About → Projects → Skills → Contact |
+| `/proyek` | app/proyek/page.tsx | Full project list + filter tech |
+| `/cv` | app/cv/page.tsx | Online CV + contact cards + ringkasan |
+| `/privacy` | app/privacy/page.tsx | Kebijakan privasi (tanpa form) |
+| `404` | app/not-found.tsx | Halaman tidak ditemukan |
+
+Sitemap hanya memuat URL halaman nyata (tanpa fragment `#`).
 
 ## Homepage Sections
-1. Hero - Asymmetric split: text + SVG network nodes (monokrom)
-2. About - Split layout + stat counters + quote + edukasi timeline
-3. Projects - Bento grid + tech filter bar
-4. Testimonials - Horizontal scroll-snap cards
-5. Skills - Grid per kategori
-6. Contact - Cards + form + social links
-7. Footer
+1. Hero — staggered word reveal + role rotator + CTA
+2. About — split layout + stat + narasi + education timeline
+3. Projects — grid 2 kolom + tech filter bar (client-side `useState`)
+4. Skills — grid per kategori + cell stagger via IntersectionObserver
+5. Contact — contact cards (WhatsApp, Email, CV, GitHub) + social links
+6. Footer
 
 ## Motion
-- Scroll reveal: opacity/translateY stagger, 0.6s, ease-out
-- Hover cards: translateY(-3px), 0.35s
-- Hover buttons: translateY(-2px), 0.25s
+- Page enter (template): opacity/translateY, 0.35s
+- Scroll reveal: opacity/translateY/blur stagger, 0.55s
+- Hover cards: translateY(-2px s.d. -4px), 0.3s
+- Hover buttons: translate + arrow shift, 0.2–0.3s
 - Active press: scale(0.97), 0.15s
-- Nav scroll: backdrop-blur transition 0.4s
-- prefers-reduced-motion: collapse to static
+- prefers-reduced-motion / `useReducedMotionSafe`: collapse to static
 
 ## Data Flow
-- Blog: MDX files in content/, fs read at build time
-- Projects: static array data
-- Testimonials: static array data
-- Contact: POST -> API Route -> Resend SDK
-- Filter proyek: client-side useState
+- Projects: static array `src/lib/data.ts`
+- Skills: static array + local SVG
+- Filter proyek: client-side `useState`
+- Kontak: deep link WhatsApp / Gmail compose (tanpa backend form)
 
 ## Brand Assets to Preserve
-- Monogram "RD" - redesign tanpa biru (warm gray bg)
-- Logo favicon - update ke warm gray
-- CV PDF
+- Monogram "RD" (warm gray `#787774`, `public/favicon.svg`)
+- CV PDF (`public/assets/CV Rifat.pdf`)
 - Existing project data dan deskripsi
+- Local skill icons

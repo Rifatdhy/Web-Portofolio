@@ -1,16 +1,21 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft } from "@phosphor-icons/react/ssr";
+import { SITE } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: `Kebijakan Privasi | ${SITE.name}`,
+  description: `Kebijakan privasi situs portofolio ${SITE.name} — data yang dikumpulkan dan hak Anda.`,
+};
 
 export default function PrivacyPage() {
   return (
-    <div className="pt-28 md:pt-32 pb-24 md:pb-32">
+    <div className="pt-20 md:pt-24 pb-24 md:pb-32">
       <div className="max-w-3xl mx-auto px-6">
         <Link
           href="/"
           className="inline-flex items-center gap-1 text-sm font-medium mb-8 hover:opacity-60 transition-opacity"
           style={{ color: "var(--color-text-secondary)" }}
         >
-          <ArrowLeft aria-hidden="true" weight="bold" className="text-lg" />
           Kembali ke Beranda
         </Link>
 
@@ -21,16 +26,15 @@ export default function PrivacyPage() {
         <div className="prose-custom">
           <h2>Data yang dikumpulkan</h2>
           <p>
-            Situs ini hanya mengumpulkan data yang Anda kirimkan secara sukarela
-            melalui formulir kontak (nama, email, dan pesan). Data ini digunakan
-            semata-mata untuk merespons pertanyaan Anda.
+            Situs ini tidak mengumpulkan data pribadi Anda. Satu-satunya data
+            yang diproses adalah data analitik anonim melalui Vercel Analytics
+            untuk memahami lalu lintas pengunjung.
           </p>
 
           <h2>Penyimpanan data</h2>
           <p>
-            Situs ini tidak mengumpulkan data pribadi secara aktif selain dari
-            analitik anonim yang disediakan oleh Vercel Analytics untuk memantau
-            lalu lintas pengunjung.
+            Tidak ada data pribadi yang disimpan di server. Statistik kunjungan
+            dikumpulkan secara anonim dan agregat oleh Vercel Analytics.
           </p>
 
           <h2>Cookie</h2>

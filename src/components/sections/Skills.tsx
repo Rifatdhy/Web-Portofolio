@@ -12,14 +12,23 @@ export function Skills() {
     "pastel-red",
   ];
 
+  const colMap: Record<number, string> = {
+    2: "sm:grid-cols-2",
+    3: "sm:grid-cols-3",
+    4: "sm:grid-cols-4",
+  };
+
+  function colsFor(count: number): string {
+    if (count % 4 === 0) return colMap[4]!;
+    if (count % 3 === 0) return colMap[3]!;
+    return colMap[2]!;
+  }
+
   return (
-    <section id="keahlian" className="py-28 md:py-32 bg-radial-soft">
+    <section id="keahlian" className="py-28 md:py-32 section-rule">
       <div className="max-w-6xl mx-auto px-6">
         <Reveal>
           <div className="mb-12 md:mb-16 flex flex-col gap-2">
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted">
-              Stack
-            </span>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance">
               Teknologi &amp; perangkat
               <br />
@@ -39,7 +48,7 @@ export function Skills() {
                     ? "md:col-span-7"
                     : catIdx === 1
                       ? "md:col-span-5"
-                      : "md:col-span-4"
+                      : "md:col-span-6"
                 }
                 style={{ transitionDelay: `${catIdx * 0.08}s` }}
               >
@@ -47,7 +56,7 @@ export function Skills() {
                   <div className={`badge ${pastelClass} mb-4`}>
                     {cat.name}
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className={`grid grid-cols-2 gap-3 ${colsFor(cat.skills.length)}`}>
                     {cat.skills.map((skill, i) => (
                       <div key={skill.name} className="skill-cell" style={{ transitionDelay: `${i * 0.06}s` }}>
                         <Image

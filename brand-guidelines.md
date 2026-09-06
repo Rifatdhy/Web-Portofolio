@@ -1,4 +1,6 @@
-# Brand Guidelines — Rifat Dhiya Ul Lail
+# Brand Guidelines — Rifat Dhiya Ul Lail (v2, Monokrom)
+
+> Dokumen ini adalah sumber kebenaran branding. v1 (aksen biru `#2563EB`, light-only) sudah tidak berlaku.
 
 ## Brand Overview
 
@@ -6,7 +8,7 @@
 |---------|-------|
 | Nama | Rifat Dhiya Ul Lail |
 | Monogram | RD |
-| Title | Web & Network Engineer |
+| Title | Web, App & Network Engineer |
 | Tagline | Nulis kode, ngulik jaringan |
 | Audience | Technical recruiters, hiring managers, freelance clients |
 | Tone | Profesional, hangat, percaya diri |
@@ -23,148 +25,155 @@
 **Do:** "Buat saya, coding bukan cuma nulis function, tapi soal bikin sesuatu yang benar-benar dipakai orang."
 **Don't:** Gunakan hiperbola marketing atau buzzwords kosong.
 
-## Color Palette
+## Color Palette (Monokrom, Tanpa Accent Color)
 
-### Primary Palette (Light Mode Only)
+Hierarki visual dibawa oleh tipografi, spacing, dan kontras — bukan warna.
+
+### Dark Mode (satu-satunya tema)
 
 ```css
-/* Neutral */
---neutral-50:  #F9F8F6;  /* Page background — warm off-white */
---neutral-100: #F0EFED;  /* Section alt background */
---neutral-200: #E5E3E0;  /* Borders, dividers */
---neutral-300: #D4D2CE;  /* Subtle borders */
---neutral-400: #A8A5A0;  /* Placeholder text */
---neutral-500: #737373;  /* Body text secondary */
---neutral-900: #1A1A1A;  /* Body text primary */
-
-/* Brand */
---brand-500:  #2563EB;   /* Primary accent — Blue */
---brand-600:  #1D4ED8;   /* Hover state */
---brand-50:   rgba(37,99,235,0.07);  /* Badge bg */
-
-/* Utility */
---white:      #FFFFFF;
---success:    #25D366;    /* WhatsApp green */
---danger:     #EA4335;    /* Email red */
+--color-surface:       #0b0b0d;  /* Page background — near-black */
+--color-surface-alt:   #141418;  /* Alt background (badge, icon-box) */
+--color-surface-card:  #15151a;  /* Card/surface background */
+--color-border:        #26262c;  /* Borders, dividers */
+--color-border-hover:  #3a3a42;  /* Hover borders */
+--color-text-primary:  #f5f5f7;  /* Primary text, CTA background */
+--color-text-secondary:#a1a1a6;  /* Secondary text */
+--color-text-muted:    #8a8a91;  /* Muted/hint text */
+--color-brand-50: rgba(245,245,247,0.06);  /* Subtle tint */
 ```
+
+**No light mode.** Palet di atas satu-satunya yang berlaku di seluruh situs.
 
 ### Color Usage Rules
 
 | Elemen | Token |
 |--------|-------|
-| Page background | `#F9F8F6` |
-| Section alt bg | `#F0EFED` |
-| Card/surface bg | `#FFFFFF` |
-| Primary text | `#1A1A1A` |
-| Secondary text | `#737373` |
-| Accent (links, CTAs) | `#2563EB` |
-| Accent hover | `#1D4ED8` |
-| Borders | `#E5E3E0` |
-| Focus ring | `#2563EB` |
+| Page background | `--color-surface` |
+| Section alt bg | `--color-surface-alt` |
+| Card/surface bg | `--color-surface-card` |
+| Primary text | `--color-text-primary` |
+| Secondary text | `--color-text-secondary` |
+| CTA button bg | `--color-text-primary` (inverted terhadap surface) |
+| Borders | `--color-border` |
+| Focus ring | `--color-text-primary` |
 
-**No dark mode.** Palette is light-only throughout.
+**Zero accent color.** Jangan menambahkan warna aksen (biru/hijau/merah) kecuali ikon brand pihak ketiga dan logo sosial.
+
+**Glow ambient (`bg-radial-soft`) — dose cap 2:** hanya di hero (glow dekoratif) dan section kontak (penutup halaman). Section konten (About, Projects, Skills) flat. Ikon panah `↗` hanya untuk link eksternal; link internal tanpa panah. Tidak ada animasi loop abadi — semua motion berpemicu scroll/hover/klik atau one-shot reveal.
 
 ## Typography
 
-| Role | Font | Weight | Fallback | Source |
-|------|------|--------|----------|--------|
-| Display/Headline | Outfit | 700, 800 | sans-serif | Google Fonts |
-| Body | DM Sans | 400, 500, 600, 700 | sans-serif | Google Fonts |
-| Mono/Code | JetBrains Mono | 400, 500 | monospace | Google Fonts |
+| Role | Font | Weight | Source |
+|------|------|--------|--------|
+| Display/Headline | Outfit | 400, 500, 600, 700, 800 | Google Fonts (next/font) |
+| Body | DM Sans | 400, 500, 600, 700 | Google Fonts (next/font) |
+| Mono/Code | JetBrains Mono | 400, 500 | Google Fonts (next/font) |
 
 ### Type Scale
 
 | Level | Size (clamp) | Weight | Line Height | Font |
 |-------|-------------|--------|-------------|------|
-| Hero H1 | `clamp(2.5rem,7vw,5rem)` | 800 | 0.92 | Outfit |
+| Hero H1 | `text-5xl sm:text-6xl lg:text-7xl` | 700 | 1.02 | Outfit |
 | Section H2 | `text-3xl md:text-4xl lg:text-5xl` | 700 | 1.1 | Outfit |
 | Section H3 | `text-2xl md:text-3xl` | 700 | 1.2 | Outfit |
-| Card Title | `text-xl md:text-2xl` | 700 | 1.2 | Outfit |
-| Body | `1.0625rem` | 400 | 1.65 | DM Sans |
+| Card Title | `text-2xl md:text-3xl` | 700 | 1.2 | Outfit |
+| Body | `1.0625rem` | 400 | 1.7 | DM Sans |
 | Body Small | `text-sm` | 400 | 1.5 | DM Sans |
-| Mono Label | `0.6875rem` | 400 | 1 | JetBrains Mono |
+| Mono Label / Eyebrow | `0.6875–0.75rem`, uppercase, `tracking-[0.25em]` | 400/600 | 1 | JetBrains Mono |
 | Badge | `0.75rem` | 500 | 1 | DM Sans |
 | Button | `0.875rem` | 600 | 1 | DM Sans |
 
 ## Logo & Monogram
 
-**Monogram:** "RD" in a rounded square (`border-radius: 8px`) with brand blue background.
+**Monogram:** "RD" dalam rounded square (`border-radius: 6px`), background warm gray `#787774` dengan teks `#FBFBFA` (lihat `public/favicon.svg`).
 
 ### Usage
-- Always on brand blue `#2563EB` background with white text
+- Jangan rotate, recolor, atau taruh di background yang ramai
 - Minimum size: 28px
-- Clear space: minimum 8px on all sides
-- Do not rotate, recolor, or place on busy backgrounds
 
 ## Spacing System
 
 | Token | Value |
 |-------|-------|
-| `space-xs` | 4px |
-| `space-sm` | 8px |
-| `space-md` | 16px |
-| `space-lg` | 24px |
-| `space-xl` | 32px |
-| `space-2xl` | 48px |
-| `section-py` | `py-24 md:py-32` |
-| `section-gap` | `gap-10 md:gap-16` |
+| Section padding | `py-28 md:py-32` |
+| Container | `max-w-6xl mx-auto px-6` |
+| Grid gaps | `gap-6` (cards), `gap-3` (chips), `gap-10 md:gap-16` (section grid) |
 
 ## Border Radius Scale
 
 | Level | Value | Usage |
 |-------|-------|-------|
-| Sharp | 0 | — |
-| Soft | 8px | Inputs, nav items |
-| Rounded | 12px | Cards, buttons |
-| Pill | 999px | Badges, dividers |
+| Soft | 8px | Focus ring |
+| Rounded | 12–20px | Cards (project 20px, edu/skill 14–16px) |
+| Pill | 999px | Buttons, badges, nav, dividers |
 
 ## Component Tokens
 
 ### Button Primary
-| State | Background | Text | Shadow |
-|-------|-----------|------|--------|
-| Default | `#2563EB` | `#FFFFFF` | none |
-| Hover | `#1D4ED8` | `#FFFFFF` | `0 8px 20px rgba(37,99,235,0.15)` |
-| Active | `scale(0.97)` | — | — |
+| State | Background | Text |
+|-------|-----------|------|
+| Default | `--color-text-primary` | `--color-surface` |
+| Hover | `#f2f2f5` | `--color-surface` |
+| Active | `scale(0.97)` | — |
 
 ### Button Outline
 | State | Background | Border | Text |
 |-------|-----------|--------|------|
-| Default | transparent | `#E5E3E0` | `#1A1A1A` |
-| Hover | transparent | `#2563EB` | `#2563EB` |
+| Default | transparent | `--color-border-hover` | `--color-text-primary` |
+| Hover | subtle surface tint | `--color-text-primary` | `--color-text-primary` |
 | Active | `scale(0.97)` | — | — |
 
-### Card (Project / Skill)
+### Card (Project / Contact / Edu / Skill)
 | Property | Value |
 |----------|-------|
-| Background | `#FFFFFF` |
-| Border | `1px solid #E5E3E0` |
-| Radius | `12px` |
-| Hover | translateY(-3px) + `0 12px 32px rgba(0,0,0,0.04)` |
+| Background | `--color-surface-card` (selalu solid agar teks terbaca di atas starfield) |
+| Border | `1px solid --color-border` |
+| Hover | `translateY(-2px s.d. -4px)` + border ke `--color-border-hover` + shadow |
+
+### Section Background (Starfield Rule)
+Satu field bintang kontinu di seluruh halaman. Section tidak boleh punya background solid sendiri:
+| Elemen | Background |
+|--------|-----------|
+| Semua `<section>` | transparan (starfield terlihat di mana-mana) |
+| Delimiter antar-section | hairline `1px solid --color-border` via class `.section-rule` |
+| Card, badge, filter pill, icon-box | tetap solid (`--color-surface-card` / `--color-surface-alt`) demi readability |
 
 ### Form Input
-| State | Border | Shadow |
-|-------|--------|--------|
-| Default | `1.5px solid #E5E3E0` | none |
-| Hover | `1.5px solid #CCCAC5` | none |
-| Focus | `1.5px solid #2563EB` | `0 0 0 3px rgba(37,99,235,0.1)` |
+> Contact form saat ini dihapus (Juni 2026). Token ini dipertahankan untuk penggunaan di masa depan.
+
+| State | Border |
+|-------|--------|
+| Default | `1px solid --color-border` |
+| Focus | `--color-text-primary` + focus-visible ring |
 
 ## Motion Guidelines
 
 | Elemen | Tipe | Durasi | Easing |
 |--------|------|--------|--------|
-| Scroll reveal | opacity + translateY | 0.45s | `cubic-bezier(0.12,0,0.3,1)` |
-| Hover card | translateY | 0.35s | `cubic-bezier(0.22,1,0.36,1)` |
-| Hover button | translateY + shadow | 0.25s | ease |
-| Active press | scale | 0.15s | ease |
-| Nav scroll | backdrop + shadow | 0.4s | ease |
-| Mobile menu | max-height + opacity | 0.4s | `cubic-bezier(0.22,1,0.36,1)` |
+| Page enter (template) | opacity + translateY | 0.35s | `[0.16, 1, 0.3, 1]` |
+| Scroll reveal | opacity + translateY + blur | 0.55s | `cubic-bezier(0.12,0,0.3,1)` |
+| Hero stagger | opacity + translateY + blur | 0.6–0.7s | `[0.16, 1, 0.3, 1]` |
+| Role rotator | opacity + translateY + blur | 0.5s | `[0.16, 1, 0.3, 1]` |
+| Hover card | translateY | 0.3s | `cubic-bezier(0.22, 0.61, 0.36, 1)` |
+| Active press | scale 0.97 | 0.15s | ease |
+
+Semua animasi Motion (`motion/react`) di-guard `useReducedMotionSafe()`; CSS reveal di-guard `prefers-reduced-motion`.
+
+### Pixel-Star Background (`BackgroundPixelStars`)
+- Canvas fixed `z-[1]`, di bawah konten (`main` z-10), `aria-hidden`, `print:hidden`
+- Bintang monokrom mengikuti `--color-text-primary` (tidak rainbow), 3 tier
+  titik bulat: mayoritas 1-2px redup (0.3-0.6), sedang 2-3px (0.6-0.85),
+  hero 4-5px terang (0.9-1.0)
+- reduced-motion → render satu frame statis, loop rAF dan shooting stars tidak jalan
+- Shooting star tiap 2-6s, trail monokrom 0.7x, 16fps retro
 
 ## Accessibility Standards
 
 - WCAG AA contrast minimum (4.5:1 body, 3:1 large text)
 - Focus-visible rings on all interactive elements
-- Skip navigation link
-- Touch targets minimum 44px
-- Reduced motion support (prefers-reduced-motion: reduce)
+- Skip navigation link ("Loncat ke konten utama")
+- Touch targets minimum 44px (`.btn` min-height 44px)
+- Reduced motion support (`prefers-reduced-motion: reduce`)
+- Semantic HTML: `nav`, `main`, landmark, `role="progressbar"`
 - Print stylesheet

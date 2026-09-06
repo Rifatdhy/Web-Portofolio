@@ -3,10 +3,9 @@ import { Outfit, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE, SOCIAL } from "@/lib/constants";
-import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { ProgressBar } from "@/components/layout/ProgressBar";
-import { CookieConsent } from "@/components/layout/CookieConsent";
+import { BackgroundPixelStars } from "@/components/ui/background-pixel-stars";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -32,17 +31,17 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: `${SITE.name} — ${SITE.title}`,
+  title: `${SITE.name} | ${SITE.title}`,
   description: SITE.description,
   openGraph: {
-    title: `${SITE.name} — Portfolio`,
+    title: `${SITE.name} | Portfolio`,
     description: SITE.description,
     type: "website",
     url: SITE.url,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE.name} — ${SITE.title}`,
+    title: `${SITE.name} | ${SITE.title}`,
     description: SITE.description,
   },
   keywords:
@@ -83,42 +82,26 @@ export default function RootLayout({
     <html
       lang="id"
       className={`${outfit.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
-      suppressHydrationWarning
     >
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta
-          name="theme-color"
-          media="(prefers-color-scheme: dark)"
-          content="#0b0b0d"
-        />
-        <meta
-          name="theme-color"
-          media="(prefers-color-scheme: light)"
-          content="#fafafc"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("theme");var m=matchMedia("(prefers-color-scheme: light)");if(!t)t=m.matches?"light":"dark";document.documentElement.setAttribute("data-theme",t);}catch(e){}})();`,
-          }}
-        />
+        <meta name="theme-color" content="#0b0b0d" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="antialiased flex flex-col min-h-screen">
+      <body className="antialiased flex flex-col min-h-dvh">
         <a
           href="#main-content"
-          className="fixed -top-20 left-4 z-[70] px-4 py-2 rounded bg-[var(--color-text-primary)] text-[var(--color-surface)] text-sm font-medium transition-all duration-300 focus:top-4"
+          className="fixed top-4 left-4 z-[70] px-4 py-2 rounded bg-[var(--color-text-primary)] text-[var(--color-surface)] text-sm font-medium transition-transform duration-300 -translate-y-24 focus:translate-y-0"
         >
           Loncat ke konten utama
         </a>
         <ProgressBar />
-        <Nav />
-        <main id="main-content">{children}</main>
+        <BackgroundPixelStars />
+        <main id="main-content" className="relative z-10">{children}</main>
         <Footer />
-        <CookieConsent />
         <Analytics />
         <SpeedInsights />
       </body>

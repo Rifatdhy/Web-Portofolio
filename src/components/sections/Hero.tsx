@@ -3,9 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowRight, ArrowUpRight } from "@phosphor-icons/react";
-import { SOCIAL } from "@/lib/constants";
-import { about } from "@/lib/data";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 
 const roles = ["Web & App Developer", "Network Engineer", "IT Support"];
@@ -24,15 +21,11 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative text-[var(--color-text-primary)] min-h-screen pt-28 flex flex-col justify-center overflow-hidden"
+      className="relative text-[var(--color-text-primary)] min-h-[100dvh] pt-20 flex flex-col justify-center overflow-hidden"
     >
       {/* Decorative parallax glow */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <motion.div
-          className="absolute left-1/2 top-1/4 h-[420px] w-[680px] -translate-x-1/2 rounded-full bg-radial-soft opacity-60 blur-3xl"
-          animate={reduce ? {} : { y: [0, -24, 0], scale: [1, 1.06, 1] }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        />
+        <div className="absolute left-1/2 top-1/4 h-[420px] w-[680px] -translate-x-1/2 rounded-full bg-radial-soft opacity-60 blur-3xl" />
       </div>
 
       <div className="relative max-w-6xl mx-auto px-6 w-full">
@@ -89,7 +82,8 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.85, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            {about}
+            Mahasiswa S1 Teknik Informatika di Jakarta Global University
+            dengan latar belakang Teknik Komputer dan Jaringan.
           </motion.p>
 
           <motion.div
@@ -100,11 +94,9 @@ export function Hero() {
           >
             <Link href="/#proyek" className="btn btn-primary">
               Lihat Proyek
-              <ArrowRight aria-hidden="true" weight="bold" className="ml-1" />
             </Link>
-            <Link href={SOCIAL.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+            <Link href="/#kontak" className="btn btn-outline">
               Hubungi Saya
-              <ArrowUpRight aria-hidden="true" weight="bold" className="ml-1" />
             </Link>
           </motion.div>
         </div>

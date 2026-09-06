@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowRight } from "@phosphor-icons/react/ssr";
 
 export default function NotFound() {
   return (
@@ -23,7 +22,6 @@ export default function NotFound() {
         </p>
         <Link href="/" className="btn btn-primary mt-8">
           Kembali ke Beranda
-          <ArrowRight aria-hidden="true" weight="bold" className="text-lg" />
         </Link>
       </div>
     </div>

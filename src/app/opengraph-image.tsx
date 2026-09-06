@@ -1,7 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
-export const alt = "Rifat Dhiya Ul Lail — Web & Network Engineer";
+export const alt = "Rifat Dhiya Ul Lail, Web & Network Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -34,11 +33,11 @@ export default async function Image() {
             borderRadius: 999,
             border: "1px solid #3a3a42",
             fontSize: 22,
-            color: "#6e6e73",
+            color: "#8a8a91",
             fontFamily: "monospace",
           }}
         >
-          React · Next.js · Laravel · TypeScript · Networking
+          React, Next.js, Laravel, TypeScript, Networking
         </div>
       </div>
     ),

@@ -4,12 +4,12 @@ export const SITE = {
   title: "Web, App & Network Engineer",
   tagline: "Nulis kode, ngulik jaringan",
   description:
-    "Portofolio Rifat Dhiya Ul Lail — Mahasiswa Teknik Informatika Jakarta Global University dengan kemampuan seimbang di pengembangan web, aplikasi desktop & mobile, jaringan komputer, dan IT support.",
-  url: "https://rifatdhy.github.io",
+    "Portofolio Rifat Dhiya Ul Lail, mahasiswa Teknik Informatika Jakarta Global University dengan kemampuan seimbang di pengembangan web, aplikasi desktop & mobile, jaringan komputer, dan IT support.",
+  url: "https://rifatdhy.my.id",
   email: "rifatdhiyaullail@gmail.com",
   emailCompose:
     "https://mail.google.com/mail/?view=cm&fs=1&to=rifatdhiyaullail@gmail.com&su=Kolaborasi%20dari%20Portofolio",
-  phone: "+6285781354857",
+  phone: "+62 857-8135-4857",
   location: "Jakarta Global University",
   major: "S1 Teknik Informatika",
   batch: "2024",

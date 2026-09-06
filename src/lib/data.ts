@@ -3,8 +3,6 @@ export interface Project {
   description: string;
   href: string;
   techs: string[];
-  icon: string;
-  gradient: string;
 }
 
 export interface Education {
@@ -65,40 +63,30 @@ export const projects: Project[] = [
     description: "Website berita sepak bola responsif dengan komponen UI reusable, dicapai menggunakan React.js dan Tailwind CSS untuk desktop maupun mobile-first.",
     href: "https://github.com/Rifatdhy/Clash-Soccer",
     techs: ["React", "TailwindCSS", "JavaScript"],
-    icon: "ph-soccer-ball",
-    gradient: "135deg, #B8B5B0 0%, #E5E3E0 100%",
   },
   {
     title: "ECO RANGERS",
     description: "Aplikasi web tentang kesadaran lingkungan dan gaya hidup berkelanjutan dengan fitur inti dibangun menggunakan PHP dan MySQL serta antarmuka responsif.",
     href: "https://github.com/Rifatdhy/ECO-RANGERS",
     techs: ["PHP", "MySQL"],
-    icon: "ph-leaf",
-    gradient: "135deg, #D4D2CE 0%, #E5E3E0 100%",
   },
   {
     title: "FINN BUDDY",
     description: "Website responsif dengan antarmuka modern yang bersih menggunakan HTML, CSS, dan JavaScript, fokus pada komponen front-end reusable dan navigasi intuitif.",
     href: "https://github.com/Rifatdhy/FINN-BUDDY",
     techs: ["HTML5", "CSS", "JavaScript"],
-    icon: "ph-wallet",
-    gradient: "135deg, #8A8782 0%, #D4D2CE 100%",
   },
   {
     title: "NodeVault",
-    description: "P2P file sharing dan music streaming terdesentralisasi — setiap laptop menjadi peer yang menyimpan filenya sendiri. Backend Java SE, frontend vanilla HTML/CSS/JS.",
+    description: "P2P file sharing dan music streaming terdesentralisasi. Setiap laptop menjadi peer yang menyimpan filenya sendiri. Backend Java SE, frontend vanilla HTML/CSS/JS.",
     href: "https://github.com/Rifatdhy/NodeVault",
     techs: ["Java", "HTML5", "CSS", "JavaScript"],
-    icon: "ph-share-network",
-    gradient: "135deg, #8A8782 0%, #D4D2CE 100%",
   },
   {
     title: "TODO-List",
     description: "Aplikasi pencatat tugas harian berbasis web, dibangun dengan React, TypeScript, Vite, dan Tailwind CSS.",
     href: "https://github.com/Rifatdhy/TODO-List",
     techs: ["React", "TypeScript", "Vite", "TailwindCSS"],
-    icon: "ph-check-square",
-    gradient: "135deg, #8A8782 0%, #D4D2CE 100%",
   },
 ];
 
