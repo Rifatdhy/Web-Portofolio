@@ -29,17 +29,13 @@ export default function ProyekPage() {
           </h1>
         </div>
 
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className="flex flex-wrap gap-2.5 mb-10">
           {filters.map((f) => (
             <button
               key={f}
               onClick={() => setActive(f)}
               aria-pressed={active === f}
-              className={`badge transition-all duration-200 cursor-pointer ${
-                active === f
-                  ? "bg-[var(--color-text-primary)] text-[var(--color-surface)] border-[var(--color-text-primary)] shadow-sm"
-                  : "text-secondary hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-hover)]"
-              }`}
+              className={`filter-pill ${active === f ? "active" : ""}`}
             >
               {f}
             </button>

@@ -33,17 +33,13 @@ export function Projects() {
         </Reveal>
 
         <Reveal>
-          <div className="flex flex-wrap gap-2 mb-10">
+          <div className="flex flex-wrap gap-2.5 mb-10">
             {allFilters.map((f) => (
               <button
                 key={f}
                 onClick={() => setActive(f)}
                 aria-pressed={active === f}
-                className={`badge transition-all duration-200 cursor-pointer ${
-                  active === f
-                    ? "bg-[var(--color-text-primary)] text-[var(--color-surface)] shadow-sm"
-                    : "border-default bg-surface-alt text-secondary hover:text-[var(--color-text-primary)]"
-                }`}
+                className={`filter-pill ${active === f ? "active" : ""}`}
               >
                 {f}
               </button>

@@ -46,7 +46,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       </p>
       <div className="flex flex-wrap gap-2 mt-auto">
         {project.techs.map((tech) => (
-          <span key={tech} className="badge border-default bg-surface-alt text-secondary">
+          <span key={tech} className="badge">
             {tech}
           </span>
         ))}
