@@ -35,19 +35,11 @@ export default function ProyekPage() {
               key={f}
               onClick={() => setActive(f)}
               aria-pressed={active === f}
-              className="px-4 min-h-[44px] text-xs font-medium rounded-full border transition-all duration-200 cursor-pointer"
-              style={{
-                background:
-                  active === f ? "var(--color-text-primary)" : "transparent",
-                color:
-                  active === f
-                    ? "var(--color-surface)"
-                    : "var(--color-text-secondary)",
-                borderColor:
-                  active === f
-                    ? "var(--color-text-primary)"
-                    : "var(--color-border)",
-              }}
+              className={`badge transition-all duration-200 cursor-pointer ${
+                active === f
+                  ? "bg-[var(--color-text-primary)] text-[var(--color-surface)] border-[var(--color-text-primary)] shadow-sm"
+                  : "text-secondary hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-hover)]"
+              }`}
             >
               {f}
             </button>

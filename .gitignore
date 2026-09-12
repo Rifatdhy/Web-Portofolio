@@ -14,5 +14,6 @@ out/
 
 *.tsbuildinfo
 .playwright-mcp/
+.freebuff/
 home-mobile.png
 *.tgz
