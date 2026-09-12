@@ -64,7 +64,7 @@ body {
 }
 
 button, a, .btn, .badge, .project-card, .contact-card, .skill-cell,
-nav, .edu-card, .stat-card, .cv-card, section {
+nav, .edu-card, .stat-card, .cv-card {
   transition: background-color 0.3s cubic-bezier(0.32, 0.72, 0, 1),
               color 0.3s cubic-bezier(0.32, 0.72, 0, 1),
               border-color 0.3s cubic-bezier(0.32, 0.72, 0, 1),
@@ -72,9 +72,26 @@ nav, .edu-card, .stat-card, .cv-card, section {
               transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+/* === LENIS SMOOTH SCROLL === */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 /* === SECTION RHYTHM === */
 .section-rule {
-  border-top: 1px solid var(--color-border);
+  border: none;
 }
 
 /* === BADGE / TAG (neutral) === */
@@ -467,15 +484,13 @@ button.badge {
 .scroll-reveal {
   opacity: 0;
   transform: translateY(16px);
-  filter: blur(3px);
-  transition: opacity 0.55s cubic-bezier(0.12, 0, 0.3, 1),
-              transform 0.55s cubic-bezier(0.12, 0, 0.3, 1),
-              filter 0.55s cubic-bezier(0.12, 0, 0.3, 1);
+  will-change: opacity, transform;
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .scroll-reveal.visible {
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0);
 }
 
 /* === LINK MICRO-INTERACTIONS === */

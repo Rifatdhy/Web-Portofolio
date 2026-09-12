@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE, SOCIAL } from "@/lib/constants";
 import { Footer } from "@/components/layout/Footer";
 import { ProgressBar } from "@/components/layout/ProgressBar";
+import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { BackgroundPixelStars } from "@/components/ui/background-pixel-stars";
 import { LiquidAmbient } from "@/components/ui/LiquidAmbient";
 import "./globals.css";
@@ -102,7 +103,9 @@ export default function RootLayout({
         <ProgressBar />
         <BackgroundPixelStars />
         <LiquidAmbient />
-        <main id="main-content" className="relative z-10">{children}</main>
+        <SmoothScroll>
+          <main id="main-content" className="relative z-10">{children}</main>
+        </SmoothScroll>
         <Footer />
         <Analytics />
         <SpeedInsights />

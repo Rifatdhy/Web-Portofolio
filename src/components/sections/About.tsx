@@ -12,7 +12,7 @@ export function About() {
   ];
 
   return (
-    <section id="tentang" className="pt-20 pb-36 md:pt-24 md:pb-40 section-rule">
+    <section id="tentang" className="pt-20 pb-36 md:pt-24 md:pb-40">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-12 gap-10 md:gap-16">
           <div className="md:col-span-5">
