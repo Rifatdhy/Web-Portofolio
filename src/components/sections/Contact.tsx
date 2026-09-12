@@ -14,7 +14,7 @@ import { Reveal } from "../magic/Reveal";
 
 export function Contact() {
   return (
-    <section id="kontak" className="py-28 md:py-32 bg-radial-soft">
+    <section id="kontak" className="relative py-28 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
         <Reveal>
           <div className="max-w-2xl mx-auto text-center">
