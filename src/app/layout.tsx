@@ -105,8 +105,8 @@ export default function RootLayout({
         <LiquidAmbient />
         <SmoothScroll>
           <main id="main-content" className="relative z-10">{children}</main>
+          <Footer />
         </SmoothScroll>
-        <Footer />
         <Analytics />
         <SpeedInsights />
       </body>

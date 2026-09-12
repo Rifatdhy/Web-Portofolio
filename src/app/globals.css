@@ -45,7 +45,7 @@
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--color-border-hover); border-radius: 3px; }
 
-html { scroll-behavior: smooth; color-scheme: dark; }
+html { scroll-behavior: auto; color-scheme: dark; }
 section[id] { scroll-margin-top: 32px; }
 
 * { -webkit-tap-highlight-color: transparent; }
