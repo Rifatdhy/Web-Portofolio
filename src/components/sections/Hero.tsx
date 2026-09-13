@@ -30,8 +30,8 @@ export function Hero() {
 
       <div className="relative max-w-6xl mx-auto px-6 w-full">
         <div className="max-w-4xl">
-          {/* Static H1 on purpose: the hero heading is the LCP element,
-              so it must paint without waiting for JS animation. */}
+          {/* Static H1 on purpose: hero content must paint with the HTML
+              without waiting for JS animation (LCP). */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02]">
             {nameWords.map((word) => (
               <span key={word} className="inline-block mr-[0.25em]">
@@ -40,52 +40,48 @@ export function Hero() {
             ))}
           </h1>
 
-          <motion.div
-            className="mt-6 flex items-center gap-2 font-display text-lg sm:text-2xl text-[var(--color-text-secondary)]"
-            initial={reduce ? {} : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.25, duration: 0.5 }}
-          >
+          {/* Static role line: the wrapper must paint immediately (the hero
+              paragraph below is the LCP element). Only the rotating word
+              itself animates. */}
+          <div className="mt-6 flex items-center gap-2 font-display text-lg sm:text-2xl text-[var(--color-text-secondary)]">
             <span className="h-px w-8 bg-[var(--color-border-hover)]" />
             <span className="relative inline-flex h-[1.6em] overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={roles[roleIdx]}
-                  className="inline-block whitespace-nowrap font-medium text-[var(--color-text-primary)]"
-                  initial={{ opacity: 0, y: "80%" }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: "-80%" }}
-                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {roles[roleIdx]}
-                </motion.span>
-              </AnimatePresence>
+              {reduce ? (
+                <span className="inline-block whitespace-nowrap font-medium text-[var(--color-text-primary)]">
+                  {roles[0]}
+                </span>
+              ) : (
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={roles[roleIdx]}
+                    className="inline-block whitespace-nowrap font-medium text-[var(--color-text-primary)]"
+                    initial={{ opacity: 0, y: "80%" }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: "-80%" }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    {roles[roleIdx]}
+                  </motion.span>
+                </AnimatePresence>
+              )}
             </span>
-          </motion.div>
+          </div>
 
-          <motion.p
-            className="text-lg sm:text-xl max-w-xl mt-8 text-[var(--color-text-secondary)]"
-            initial={reduce ? {} : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          >
+          {/* Static paragraph on purpose: this is the LCP element, so it
+              must paint with the HTML without waiting for JS animation. */}
+          <p className="text-lg sm:text-xl max-w-xl mt-8 text-[var(--color-text-secondary)]">
             Mahasiswa S1 Teknik Informatika di Jakarta Global University
             dengan latar belakang Teknik Komputer dan Jaringan.
-          </motion.p>
+          </p>
 
-          <motion.div
-            className="flex flex-wrap gap-3 mt-12"
-            initial={reduce ? {} : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="flex flex-wrap gap-3 mt-12">
             <Link href="/#proyek" className="btn btn-primary">
               Lihat Proyek
             </Link>
             <Link href="/#kontak" className="btn btn-outline">
               Hubungi Saya
             </Link>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
