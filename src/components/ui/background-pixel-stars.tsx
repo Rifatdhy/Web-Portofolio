@@ -141,62 +141,97 @@ function renderLiveFrame(
   });
 }
 
+function startStarfield(canvas: HTMLCanvasElement, reduce: boolean): () => void {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return () => {};
+
+  let stars = initStars(canvas);
+  const color = resolveStarColor();
+  let raf: number | null = null;
+  let lastRender = 0;
+
+  const handleResize = (): void => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    stars = initStars(canvas);
+    if (reduce || raf === null) {
+      renderStaticFrame(ctx, canvas, stars, color);
+    }
+  };
+  window.addEventListener("resize", handleResize);
+
+  if (reduce) {
+    renderStaticFrame(ctx, canvas, stars, color);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }
+
+  const regen = setInterval(() => {
+    if (stars.length === 0) return;
+    const n = Math.max(1, Math.floor(stars.length * percentToRegenerate));
+    for (let i = 0; i < n; i++) {
+      const idx = Math.floor(Math.random() * stars.length);
+      stars[idx] = makeStar(canvas);
+    }
+  }, starRegenerationInterval);
+
+  const tick = (timestamp: number): void => {
+    if (timestamp - lastRender >= frameInterval) {
+      lastRender = timestamp;
+      renderLiveFrame(ctx, canvas, stars, color);
+    }
+    raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+
+  return () => {
+    if (raf !== null) cancelAnimationFrame(raf);
+    clearInterval(regen);
+    window.removeEventListener("resize", handleResize);
+  };
+}
+
 function BackgroundPixelStarsInner() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const reduce = useReducedMotionSafe();
 
   useEffect(() => {
-    if (!canvasRef.current) return;
-    const canvas = canvasRef.current;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let stars = initStars(canvas);
-    const color = resolveStarColor();
-    let raf: number | null = null;
-    let lastRender = 0;
-
-    const handleResize = (): void => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      stars = initStars(canvas);
-      if (reduce || raf === null) {
-        renderStaticFrame(ctx, canvas, stars, color);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-
+    // Static single frame is cheap — render immediately.
     if (reduce) {
-      renderStaticFrame(ctx, canvas, stars, color);
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      return startStarfield(canvas, true);
     }
 
-    const regen = setInterval(() => {
-      if (stars.length === 0) return;
-      const n = Math.max(1, Math.floor(stars.length * percentToRegenerate));
-      for (let i = 0; i < n; i++) {
-        const idx = Math.floor(Math.random() * stars.length);
-        stars[idx] = makeStar(canvas);
-      }
-    }, starRegenerationInterval);
+    // Defer the live loop until the browser is idle so canvas init
+    // (sizing, getComputedStyle, star generation) doesn't compete
+    // with hydration and LCP on low-end devices.
+    let cleanup: (() => void) | undefined;
+    let idleId: number | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    let cancelled = false;
 
-    const tick = (timestamp: number): void => {
-      if (timestamp - lastRender >= frameInterval) {
-        lastRender = timestamp;
-        renderLiveFrame(ctx, canvas, stars, color);
-      }
-      raf = requestAnimationFrame(tick);
+    const start = (): void => {
+      if (cancelled) return;
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      cleanup = startStarfield(canvas, false);
     };
-    raf = requestAnimationFrame(tick);
+
+    if ("requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(start, { timeout: 2000 });
+    } else {
+      timeoutId = setTimeout(start, 1200);
+    }
 
     return () => {
-      if (raf !== null) cancelAnimationFrame(raf);
-      clearInterval(regen);
-      window.removeEventListener("resize", handleResize);
+      cancelled = true;
+      if (idleId !== null) window.cancelIdleCallback(idleId);
+      if (timeoutId !== null) clearTimeout(timeoutId);
+      cleanup?.();
     };
   }, [reduce]);
 

@@ -30,34 +30,21 @@ export function Hero() {
 
       <div className="relative max-w-6xl mx-auto px-6 w-full">
         <div className="max-w-4xl">
-          <motion.h1
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02]"
-            initial={reduce ? {} : { opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {nameWords.map((word, i) => (
-              <motion.span
-                key={word}
-                className="inline-block mr-[0.25em]"
-                initial={reduce ? {} : { opacity: 0, y: 20, filter: "blur(6px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{
-                  delay: 0.15 + i * 0.12,
-                  duration: 0.6,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-              >
+          {/* Static H1 on purpose: the hero heading is the LCP element,
+              so it must paint without waiting for JS animation. */}
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.02]">
+            {nameWords.map((word) => (
+              <span key={word} className="inline-block mr-[0.25em]">
                 {word}
-              </motion.span>
+              </span>
             ))}
-          </motion.h1>
+          </h1>
 
           <motion.div
             className="mt-6 flex items-center gap-2 font-display text-lg sm:text-2xl text-[var(--color-text-secondary)]"
             initial={reduce ? {} : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
+            transition={{ delay: 0.25, duration: 0.5 }}
           >
             <span className="h-px w-8 bg-[var(--color-border-hover)]" />
             <span className="relative inline-flex h-[1.6em] overflow-hidden">
@@ -65,10 +52,10 @@ export function Hero() {
                 <motion.span
                   key={roles[roleIdx]}
                   className="inline-block whitespace-nowrap font-medium text-[var(--color-text-primary)]"
-                  initial={{ opacity: 0, y: "80%", filter: "blur(8px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: "-80%", filter: "blur(8px)" }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  initial={{ opacity: 0, y: "80%" }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: "-80%" }}
+                  transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 >
                   {roles[roleIdx]}
                 </motion.span>
@@ -80,7 +67,7 @@ export function Hero() {
             className="text-lg sm:text-xl max-w-xl mt-8 text-[var(--color-text-secondary)]"
             initial={reduce ? {} : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.85, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 0.4, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             Mahasiswa S1 Teknik Informatika di Jakarta Global University
             dengan latar belakang Teknik Komputer dan Jaringan.
@@ -90,7 +77,7 @@ export function Hero() {
             className="flex flex-wrap gap-3 mt-12"
             initial={reduce ? {} : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 0.55, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <Link href="/#proyek" className="btn btn-primary">
               Lihat Proyek

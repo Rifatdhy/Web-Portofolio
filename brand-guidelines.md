@@ -150,9 +150,9 @@ Hierarki visual dibawa oleh tipografi, spacing, dan kontras — bukan warna.
 | Elemen | Tipe | Durasi | Easing |
 |--------|------|--------|--------|
 | Page enter (template) | opacity + translateY | 0.35s | `[0.16, 1, 0.3, 1]` |
-| Scroll reveal | opacity + translateY + blur | 0.55s | `cubic-bezier(0.12,0,0.3,1)` |
-| Hero stagger | opacity + translateY + blur | 0.6–0.7s | `[0.16, 1, 0.3, 1]` |
-| Role rotator | opacity + translateY + blur | 0.5s | `[0.16, 1, 0.3, 1]` |
+| Scroll reveal | opacity + translateY (tanpa blur, agar composited) | 0.55s | `cubic-bezier(0.12,0,0.3,1)` |
+| Hero stagger (sub-H1; H1 statis demi LCP) | opacity + translateY | 0.5s, delay 0.25–0.55s | `[0.16, 1, 0.3, 1]` |
+| Role rotator | opacity + translateY | 0.4s | `[0.16, 1, 0.3, 1]` |
 | Hover card | translateY | 0.3s | `cubic-bezier(0.22, 0.61, 0.36, 1)` |
 | Active press | scale 0.97 | 0.15s | ease |
 
@@ -164,6 +164,7 @@ Semua animasi Motion (`motion/react`) di-guard `useReducedMotionSafe()`; CSS rev
   titik bulat: mayoritas 1-2px redup (0.3-0.6), sedang 2-3px (0.6-0.85),
   hero 4-5px terang (0.9-1.0)
 - reduced-motion → render satu frame statis, loop rAF tidak jalan
+- Live loop di-init setelah browser idle (`requestIdleCallback`, fallback timeout) agar tidak berebut dengan hydration/LCP
 - Twinkle effect halus dengan regenerasi berkala, 16fps retro
 
 ## Accessibility Standards
