@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { readdirSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { allTechs, projects, skillCategories } from "./data";
 
@@ -26,6 +26,22 @@ describe("data integrity", () => {
     for (const p of projects) {
       expect(p.href).toMatch(/^https?:\/\//);
       expect(p.techs.length).toBeGreaterThan(0);
+      if (p.demo !== undefined) {
+        expect(p.demo).toMatch(/^https?:\/\//);
+      }
+    }
+  });
+
+  it("project images reference existing files in public/", () => {
+    for (const p of projects) {
+      if (p.image !== undefined) {
+        const filePath = resolve(
+          process.cwd(),
+          "public",
+          p.image.replace(/^\//, ""),
+        );
+        expect(existsSync(filePath), `${p.image} missing`).toBe(true);
+      }
     }
   });
 });

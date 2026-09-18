@@ -3,6 +3,8 @@ export interface Project {
   description: string;
   href: string;
   techs: string[];
+  demo?: string;
+  image?: string;
 }
 
 export interface Education {
@@ -19,35 +21,35 @@ export interface Experience {
   description: string;
 }
 
-export const about = "Mahasiswa S1 Teknik Informatika di Jakarta Global University dengan latar belakang Teknik Komputer dan Jaringan. Memiliki kompetensi dan pengalaman di bidang pengembangan web, aplikasi desktop dan mobile, jaringan komputer, serta IT support. Terampil dalam mengembangkan aplikasi web responsif dan aplikasi desktop, serta memiliki pemahaman yang baik mengenai administrasi Linux, konfigurasi jaringan, dan troubleshooting perangkat maupun sistem jaringan. Adaptif terhadap perkembangan teknologi, memiliki kemauan belajar yang tinggi, serta berorientasi pada pengembangan solusi teknologi yang efektif dan praktis melalui proyek akademik maupun personal.";
+export const about = "Mahasiswa S1 Teknik Informatika di Jakarta Global University dengan latar belakang Teknik Komputer dan Jaringan. Berpengalaman mengembangkan aplikasi web menggunakan React.js, Laravel, PHP, JavaScript, Tailwind CSS, dan MySQL melalui proyek akademik maupun personal. Familiar dengan jaringan komputer meliputi TCP/IP, LAN & WAN, routing dan switching, VLAN, DHCP, DNS, NAT, dan MikroTik RouterOS, serta lingkungan Linux dan troubleshooting IT. Memadukan kemampuan software development dengan networking dan IT support untuk membangun solusi teknologi yang praktis.";
 
 export const education: Education[] = [
   {
     school: "Jakarta Global University",
     degree: "S1 Teknik Informatika",
     period: "2024 - Sekarang",
-    info: "IPK 3.48/4.00",
+    info: "IPK 3.48/4.00 · Struktur Data & Algoritma, Rekayasa Perangkat Lunak, Sistem Basis Data, Jaringan Komputer, Pemrograman Web",
   },
   {
     school: "SMK Negeri 3 Depok",
     degree: "Teknik Komputer dan Jaringan",
     period: "2020 - 2023",
-    info: "Jaringan komputer, infrastruktur jaringan, administrasi Linux & server",
+    info: "Infrastruktur Jaringan, Administrasi Linux & Server, Konfigurasi Router & Switch, Dasar Keamanan Jaringan",
   },
 ];
 
 export const experiences: Experience[] = [
   {
+    company: "World Cup Qualifier",
+    position: "Ticketing & Helpdesk Volunteer",
+    period: "-",
+    description: "Memberikan bantuan teknis on-site untuk operasional tiket digital: membantu akses, pembuatan, dan pengelolaan tiket, troubleshooting masalah dasar, memandu pengguna, serta berkoordinasi dengan tim menjaga kelancaran acara."
+  },
+  {
     company: "BAPENDA Provinsi DKI Jakarta",
     position: "Administrative Staff Intern",
     period: "Jan 2023 - Mar 2023",
     description: "Menjaga dan memverifikasi 500 catatan data wajib pajak untuk akurasi data, membantu pengorganisasian dokumen resmi dan laporan administrasi, memperbarui database, serta mendukung operasional kantor harian."
-  },
-  {
-    company: "PT Pizza Boxx",
-    position: "Kitchen Staff",
-    period: "-",
-    description: "Menyiapkan makanan sesuai standar kualitas dan higienis perusahaan, mengelola inventaris dan stok dapur, bekerja efisien dalam lingkungan serba cepat, serta berkolaborasi dengan tim untuk operasional harian."
   },
   {
     company: "Komisi Pemilihan Umum",
@@ -68,13 +70,13 @@ export const projects: Project[] = [
     title: "ECO RANGERS",
     description: "Aplikasi web tentang kesadaran lingkungan dan gaya hidup berkelanjutan dengan fitur inti dibangun menggunakan PHP dan MySQL serta antarmuka responsif.",
     href: "https://github.com/Rifatdhy/ECO-RANGERS",
-    techs: ["PHP", "MySQL"],
+    techs: ["PHP", "MySQL", "HTML5", "CSS", "JavaScript"],
   },
   {
     title: "FINN BUDDY",
-    description: "Website responsif dengan antarmuka modern yang bersih menggunakan HTML, CSS, dan JavaScript, fokus pada komponen front-end reusable dan navigasi intuitif.",
+    description: "Aplikasi mobile cross-platform yang dibangun dengan Flutter dan Dart, dengan komponen UI reusable, layout responsif untuk berbagai ukuran layar, dan navigasi yang intuitif.",
     href: "https://github.com/Rifatdhy/FINN-BUDDY",
-    techs: ["HTML5", "CSS", "JavaScript"],
+    techs: ["Flutter", "Dart"],
   },
   {
     title: "NodeVault",
@@ -101,53 +103,59 @@ export const allTechs = [
   "Java",
   "TypeScript",
   "Vite",
+  "Flutter",
+  "Dart",
 ];
 
 export const skillCategories = [
   {
     name: "Programming & Frontend",
     skills: [
-      { name: "JavaScript", slug: "javascript", color: "#F7DF1E" },
-      { name: "TypeScript", slug: "typescript", color: "#3178C6" },
-      { name: "React", slug: "react", color: "#61DAFB" },
-      { name: "Next.js", slug: "nextjs", color: "#FFFFFF" },
-      { name: "Tailwind CSS", slug: "tailwindcss", color: "#06B6D4" },
-      { name: "Bootstrap", slug: "bootstrap", color: "#7952B3" },
-      { name: "HTML5", slug: "html5", color: "#E34F26" },
-      { name: "CSS3", slug: "css", color: "#1572B6" },
+      { name: "JavaScript", slug: "javascript" },
+      { name: "TypeScript", slug: "typescript" },
+      { name: "React", slug: "react" },
+      { name: "Next.js", slug: "nextjs" },
+      { name: "Tailwind CSS", slug: "tailwindcss" },
+      { name: "Bootstrap", slug: "bootstrap" },
+      { name: "HTML5", slug: "html5" },
+      { name: "CSS3", slug: "css" },
+      { name: "Flutter", slug: "flutter" },
+      { name: "Dart", slug: "dart" },
     ],
   },
   {
     name: "Backend & Database",
     skills: [
-      { name: "Laravel", slug: "laravel", color: "#FF2D20" },
-      { name: "Node.js", slug: "nodejs", color: "#5FA04E" },
-      { name: "Java", slug: "openjdk", color: "#000000" },
-      { name: "PHP", slug: "php", color: "#777BB4" },
-      { name: "PostgreSQL", slug: "postgresql", color: "#4169E1" },
-      { name: "Python", slug: "python", color: "#3776AB" },
-      { name: "MySQL", slug: "mysql", color: "#4479A1" },
-      { name: "REST API", slug: "insomnia", color: "#4000BF" },
+      { name: "Laravel", slug: "laravel" },
+      { name: "Node.js", slug: "nodejs" },
+      { name: "Java", slug: "openjdk" },
+      { name: "PHP", slug: "php" },
+      { name: "PostgreSQL", slug: "postgresql" },
+      { name: "Python", slug: "python" },
+      { name: "MySQL", slug: "mysql" },
+      { name: "REST API", slug: "insomnia" },
     ],
   },
   {
     name: "Networking",
     skills: [
-      { name: "Cisco", slug: "cisco", color: "#1BA0D7" },
-      { name: "MikroTik", slug: "mikrotik", color: "#FF6600" },
-      { name: "Ubuntu", slug: "ubuntu", color: "#E95420" },
-      { name: "Linux", slug: "linux", color: "#FCC624" },
+      { name: "Cisco", slug: "cisco" },
+      { name: "MikroTik", slug: "mikrotik" },
+      { name: "Ubuntu", slug: "ubuntu" },
+      { name: "Linux", slug: "linux" },
     ],
   },
   {
     name: "Tools",
     skills: [
-      { name: "Git", slug: "git", color: "#F05032" },
-      { name: "GitHub", slug: "github", color: "#181717" },
-      { name: "Docker", slug: "docker", color: "#2496ED" },
-      { name: "Express", slug: "express", color: "#FFFFFF" },
-      { name: "Prisma", slug: "prisma", color: "#FFFFFF" },
-      { name: "Postman", slug: "postman", color: "#FF6C37" },
+      { name: "Git", slug: "git" },
+      { name: "GitHub", slug: "github" },
+      { name: "Docker", slug: "docker" },
+      { name: "Express", slug: "express" },
+      { name: "Prisma", slug: "prisma" },
+      { name: "Postman", slug: "postman" },
+      { name: "VS Code", slug: "vscode" },
+      { name: "Winbox", slug: "winbox" },
     ],
   },
 ];

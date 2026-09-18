@@ -54,7 +54,7 @@ export default function CVPage() {
             {[
               { href: SOCIAL.whatsapp, label: "WhatsApp", value: SITE.phone, icon: <WhatsappLogo aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
               { href: SITE.emailCompose, label: "Email", value: SITE.email, icon: <At aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
-              { href: "/assets/CV Rifat.pdf", label: "Download CV", value: "PDF, Rifat Dhiya Ul Lail", icon: <FilePdf aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
+              { href: "/assets/CV Rifat Dhiya_IT Intern.pdf", label: "Download CV", value: "PDF, Rifat Dhiya Ul Lail", icon: <FilePdf aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
               { href: SOCIAL.github, label: "GitHub", value: "@Rifatdhy", icon: <GithubLogo aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
             ].map((item) => (
               <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="cv-card">
@@ -114,9 +114,11 @@ export default function CVPage() {
                 <div key={exp.company}>
                   <div className="flex items-start justify-between gap-4">
                     <h4 className="font-semibold">{exp.position}</h4>
-                    <p className="text-sm whitespace-nowrap" style={{ color: "var(--color-text-muted)" }}>
-                      {exp.period === "-" ? "Magang" : exp.period}
-                    </p>
+                    {exp.period !== "-" && (
+                      <p className="text-sm whitespace-nowrap" style={{ color: "var(--color-text-muted)" }}>
+                        {exp.period}
+                      </p>
+                    )}
                   </div>
                   <p className="text-sm font-medium" style={{ color: "var(--color-text-secondary)" }}>
                     {exp.company}

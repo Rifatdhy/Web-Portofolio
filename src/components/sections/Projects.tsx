@@ -1,21 +1,8 @@
-"use client";
-
-import { useState } from "react";
-import { AnimatePresence, LayoutGroup } from "motion/react";
 import { projects } from "@/lib/data";
 import { ProjectCard } from "../magic/ProjectCard";
 import { Reveal } from "../magic/Reveal";
 
-const allFilters = ["Semua", ...Array.from(new Set(projects.flatMap((p) => p.techs)))];
-
 export function Projects() {
-  const [active, setActive] = useState("Semua");
-
-  const filtered =
-    active === "Semua"
-      ? projects
-      : projects.filter((p) => p.techs.includes(active));
-
   return (
     <section id="proyek" className="pt-20 pb-36 md:pt-24 md:pb-44">
       <div className="max-w-6xl mx-auto px-6">
@@ -32,44 +19,11 @@ export function Projects() {
           </div>
         </Reveal>
 
-        <Reveal>
-          <div className="flex flex-wrap gap-2.5 mb-10">
-            {allFilters.map((f) => (
-              <button
-                key={f}
-                onClick={() => setActive(f)}
-                aria-pressed={active === f}
-                className={`filter-pill ${active === f ? "active" : ""}`}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
-        </Reveal>
-
-        {filtered.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-lg text-muted">
-              Tidak ada proyek dengan filter tersebut.
-            </p>
-            <button
-              onClick={() => setActive("Semua")}
-              className="btn btn-outline mt-6"
-            >
-              Reset filter
-            </button>
-          </div>
-        ) : (
-          <div className="grid md:grid-cols-2 gap-6">
-            <LayoutGroup>
-              <AnimatePresence>
-                {filtered.map((project, i) => (
-                  <ProjectCard key={project.title} project={project} index={i} />
-                ))}
-              </AnimatePresence>
-            </LayoutGroup>
-          </div>
-        )}
+        <div className="grid md:grid-cols-2 gap-6">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.title} project={project} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   );

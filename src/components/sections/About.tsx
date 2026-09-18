@@ -53,62 +53,46 @@ export function About() {
                 className="mt-6 leading-relaxed"
                 style={{ color: "var(--color-text-primary)" }}
               >
-                Halo, saya Rifat, mahasiswa S1 Teknik Informatika di Jakarta
+                Halo, saya Rifat — mahasiswa S1 Teknik Informatika di Jakarta
                 Global University dengan latar belakang Teknik Komputer dan
-                Jaringan. Saya memiliki ketertarikan pada software development
-                dan infrastruktur teknologi, dengan pengalaman mengembangkan
-                aplikasi sekaligus memahami bagaimana sistem dan jaringan di
-                baliknya bekerja.
+                Jaringan. Saya membangun aplikasi sekaligus memahami
+                infrastruktur di baliknya: dari kode frontend sampai
+                konektivitas jaringan.
               </p>
             </Reveal>
 
             <Reveal className="max-w-prose">
               <p className="mt-4 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                Di bidang software development, saya berfokus pada
-                pengembangan aplikasi web dan terus memperdalam ekosistem
-                JavaScript/TypeScript. Saya terbiasa menggunakan React dan
-                Next.js untuk membangun antarmuka web yang responsif dan
-                modern, serta Tailwind CSS untuk pengembangan UI yang
-                konsisten dan efisien. Untuk kebutuhan backend, saya memiliki
-                pengalaman menggunakan Laravel dan Node.js, termasuk membangun
-                REST API, mengelola database, serta mengintegrasikan frontend
-                dengan layanan backend. Saya juga memiliki pengalaman
-                mengembangkan aplikasi desktop menggunakan Java dan aplikasi
-                mobile.
+                Di sisi software, saya bekerja di ekosistem
+                JavaScript/TypeScript — React dan Next.js untuk antarmuka
+                yang responsif, Tailwind CSS untuk UI yang konsisten, serta
+                Laravel (PHP/MySQL) dan Node.js untuk REST API, pengelolaan database,
+                dan integrasi frontend-backend. Saya juga berpengalaman
+                membangun aplikasi desktop dengan Java dan aplikasi mobile
+                dengan Flutter.
               </p>
             </Reveal>
 
             <Reveal className="max-w-prose">
               <p className="mt-4 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                Selain pengembangan aplikasi, saya memiliki dasar yang kuat di
-                bidang jaringan komputer dan IT infrastructure. Dengan latar
-                belakang Teknik Komputer dan Jaringan, saya memahami konsep
-                routing, switching, TCP/IP, serta konfigurasi dan administrasi
-                jaringan menggunakan MikroTik dan Cisco. Saya juga terbiasa
-                melakukan troubleshooting perangkat, konektivitas jaringan,
-                serta administrasi sistem berbasis Linux.
+                Di sisi infrastruktur, saya memahami TCP/IP, LAN & WAN,
+                routing dan switching, VLAN, DHCP, DNS, dan NAT, terbiasa
+                konfigurasi jaringan dengan MikroTik RouterOS dan Cisco,
+                serta troubleshooting perangkat, konektivitas, dan
+                administrasi sistem Linux. Workflow saya didukung Git dan
+                GitHub, dengan MySQL dan PostgreSQL untuk data serta
+                eksplorasi Docker menuju pengembangan yang lebih
+                terstruktur dan scalable.
               </p>
             </Reveal>
 
             <Reveal className="max-w-prose">
               <p className="mt-4 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                Dalam proses pengembangan, saya menggunakan Git dan GitHub
-                untuk version control serta memahami workflow pengembangan dan
-                deployment aplikasi. Saya juga mulai mendalami Docker, database
-                seperti MySQL dan PostgreSQL, serta praktik pengembangan
-                aplikasi yang lebih terstruktur dan scalable.
-              </p>
-            </Reveal>
-
-            <Reveal className="max-w-prose">
-              <p className="mt-4 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                Saya memiliki rasa ingin tahu yang tinggi dan senang
-                mempelajari teknologi baru melalui proyek akademik maupun
-                personal. Saat ini, saya terus meningkatkan kemampuan di bidang
-                TypeScript, modern full-stack development, UI/UX, cloud dan
-                deployment, serta eksplorasi berbagai tools dan teknologi yang
-                dapat menghasilkan aplikasi yang tidak hanya berfungsi dengan
-                baik, tetapi juga memiliki pengalaman pengguna yang optimal.
+                Saya senang mempelajari teknologi baru lewat proyek akademik
+                maupun personal — saat ini fokus memperdalam TypeScript,
+                full-stack modern, UI/UX, serta cloud dan deployment, agar
+                aplikasi yang saya buat tidak hanya berfungsi dengan baik,
+                tetapi juga nyaman dipakai.
               </p>
             </Reveal>
           </div>

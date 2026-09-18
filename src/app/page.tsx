@@ -7,6 +7,9 @@ import { Hero } from "@/components/sections/Hero";
 const About = dynamic(() =>
   import("@/components/sections/About").then((m) => m.About),
 );
+const Experience = dynamic(() =>
+  import("@/components/sections/Experience").then((m) => m.Experience),
+);
 const Projects = dynamic(() =>
   import("@/components/sections/Projects").then((m) => m.Projects),
 );
@@ -22,6 +25,7 @@ export default function Home() {
     <div>
       <Hero />
       <About />
+      <Experience />
       <Projects />
       <Skills />
       <Contact />

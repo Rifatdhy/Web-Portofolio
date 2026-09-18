@@ -64,7 +64,7 @@ body {
 }
 
 button, a, .btn, .badge, .project-card, .contact-card, .skill-cell,
-nav, .edu-card, .stat-card, .cv-card {
+nav, .edu-card, .cv-card {
   transition: background-color 0.3s cubic-bezier(0.32, 0.72, 0, 1),
               color 0.3s cubic-bezier(0.32, 0.72, 0, 1),
               border-color 0.3s cubic-bezier(0.32, 0.72, 0, 1),
@@ -89,67 +89,12 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-/* === SECTION RHYTHM === */
-.section-rule {
-  border: none;
-}
-
 /* === BADGE / TAG (neutral) === */
 .pastel-red,
 .pastel-blue,
 .pastel-green,
 .pastel-yellow {
   background: var(--color-brand-50);
-  color: var(--color-text-secondary);
-}
-
-.text-balance { text-wrap: balance; }
-
-/* === LIQUID GLASS SYSTEM === */
-.liquid-glass {
-  background: linear-gradient(135deg, rgba(25, 25, 32, 0.72) 0%, rgba(15, 15, 20, 0.52) 100%);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.14),
-              inset 0 -1px 1px 0 rgba(0, 0, 0, 0.4),
-              0 16px 36px -8px rgba(0, 0, 0, 0.45);
-}
-
-/* === STAT CARDS === */
-.stat-card {
-  background: linear-gradient(135deg, rgba(25, 25, 32, 0.75) 0%, rgba(15, 15, 20, 0.55) 100%);
-  backdrop-filter: blur(18px) saturate(150%);
-  -webkit-backdrop-filter: blur(18px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12),
-              0 12px 30px -8px rgba(0, 0, 0, 0.4);
-  border-radius: 16px;
-  padding: 1.5rem 1rem;
-  text-align: center;
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-}
-.stat-card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: inset 0 1px 2px 0 rgba(255, 255, 255, 0.2),
-              0 18px 36px -8px rgba(0, 0, 0, 0.55),
-              0 0 20px 0 rgba(255, 255, 255, 0.03);
-  transform: translateY(-2px);
-}
-.stat-number {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 2.25rem;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  margin-bottom: 0.375rem;
-  color: var(--color-text-primary);
-}
-.stat-label {
-  font-size: 0.75rem;
-  font-weight: 500;
   color: var(--color-text-secondary);
 }
 
@@ -525,8 +470,6 @@ html.lenis, html.lenis body {
 }
 
 /* === LINK MICRO-INTERACTIONS === */
-.border-default { border-color: var(--color-border); }
-.bg-surface-alt { background-color: var(--color-surface-alt); }
 .text-secondary { color: var(--color-text-secondary); }
 .text-muted { color: var(--color-text-muted); }
 
@@ -608,7 +551,6 @@ h1, h2, h3 { text-wrap: balance; }
 /* === MEDIA === */
 @media (max-width: 768px) {
   ::-webkit-scrollbar { width: 4px; }
-  .stat-number { font-size: 1.75rem; }
 }
 @media (max-width: 640px) {
   section[id] { scroll-margin-top: 24px; }
@@ -619,12 +561,12 @@ h1, h2, h3 { text-wrap: balance; }
   .skill-cell { opacity: 1 !important; transform: none !important; }
   .skill-cell:hover { transform: none; box-shadow: none; }
   .skill-cell img, .skill-cell svg { transform: none; filter: grayscale(0) contrast(1) brightness(1.2); }
-  .project-card, .contact-card, .stat-card, .edu-card, .cv-card { box-shadow: none !important; }
+  .project-card, .contact-card, .edu-card, .cv-card { box-shadow: none !important; }
 }
 @media print {
   nav, #progress-bar, .btn, button { display: none !important; }
   body { background: white !important; color: black !important; font-size: 12pt; }
   .scroll-reveal { opacity: 1 !important; transform: none !important; }
   section { break-inside: avoid; }
-  .stat-card, .project-card, .skill-cell, .contact-card, .edu-card { border: 1px solid #CCC !important; }
+  .project-card, .skill-cell, .contact-card, .edu-card { border: 1px solid #CCC !important; }
 }

@@ -97,7 +97,7 @@ export function Contact() {
                 />
               </a>
               <a
-                href="/assets/CV%20Rifat.pdf"
+                href="/assets/CV%20Rifat%20Dhiya_IT%20Intern.pdf"
                 download
                 className="group contact-card"
               >
