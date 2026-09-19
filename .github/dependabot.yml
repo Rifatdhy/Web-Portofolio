@@ -29,6 +29,12 @@ updates:
       # once eslint-config-next supports ESLint 10.
       - dependency-name: "eslint"
         update-types: ["version-update:semver-major"]
+      # typescript-eslint (via eslint-config-next) refuses to load under TS 7:
+      # `npm run lint` dies with "typescript-eslint does not support TS 7.0."
+      # Tracking issue: typescript-eslint/typescript-eslint#10940. Remove once
+      # typescript-eslint ships TS 7 support.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: /

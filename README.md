@@ -91,9 +91,9 @@ tersedia.
 
 ## Dependabot
 
-`minor`/`patch` dikelompokkan jadi satu PR mingguan. Dua bump `major` sengaja
+`minor`/`patch` dikelompokkan jadi satu PR mingguan. Tiga bump `major` sengaja
 di-`ignore` di `.github/dependabot.yml` — bukan karena malas, tapi karena
-keduanya merusak:
+ketiganya merusak:
 
 - **`@types/node`** harus mengikuti major runtime di `.node-version` (22).
   Bump ke 26 membuat tipe mendeskripsikan API Node 26 yang tidak ada di
@@ -102,9 +102,13 @@ keduanya merusak:
   `eslint-plugin-react@^7` masih memanggil `context.getFilename()` yang dihapus
   di ESLint 10, sehingga `npm run lint` mati dengan
   `contextOrFilename.getFilename is not a function`.
+- **`typescript` 7** ditolak `typescript-eslint` yang dibundel
+  `eslint-config-next`: `npm run lint` mati dengan
+  `typescript-eslint does not support TS 7.0.` (pelacakan:
+  `typescript-eslint/typescript-eslint#10940`).
 
-Hapus entri `ignore` yang bersangkutan begitu runtime naik / `eslint-config-next`
-mendukung ESLint 10.
+Hapus entri `ignore` yang bersangkutan begitu runtime naik / dependensi hulu
+mendukung versi barunya.
 
 ## Konvensi
 
