@@ -11,6 +11,7 @@ import {
 export const metadata: Metadata = {
   title: `Curriculum Vitae | ${SITE.name}`,
   description: `CV ${SITE.name} — ${SITE.title}. Pendidikan, pengalaman, keahlian, dan proyek.`,
+  alternates: { canonical: "/cv" },
 };
 
 export default function CVPage() {

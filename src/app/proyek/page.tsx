@@ -5,6 +5,7 @@ import { ProjectFilter } from "./ProjectFilter";
 export const metadata: Metadata = {
   title: `Proyek | ${SITE.name}`,
   description: `Kumpulan proyek ${SITE.name} — aplikasi web, desktop, dan mobile beserta teknologi yang dipakai.`,
+  alternates: { canonical: "/proyek" },
 };
 
 export default function ProyekPage() {

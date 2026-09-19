@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { Hero } from "@/components/sections/Hero";
+
+// Canonical is declared per page, not on the root layout — a layout-level
+// canonical would make every sub-page claim the homepage as canonical.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 // Below-the-fold sections are code-split so the initial JS bundle only
 // covers the hero (LCP). SSR stays enabled, so crawlers and first paint

@@ -51,7 +51,7 @@ export const education: Education[] = [
   {
     school: "Jakarta Global University",
     degree: "S1 Teknik Informatika",
-    period: "2024 - Sekarang",
+    period: "2024 - sekarang",
     info: "IPK 3.48/4.00 · Struktur Data & Algoritma, Rekayasa Perangkat Lunak, Sistem Basis Data, Jaringan Komputer, Pemrograman Web",
   },
   {
@@ -86,6 +86,7 @@ export const projects: Project[] = [
     title: "Clash.Soccer",
     description: "Website berita sepak bola responsif dengan komponen UI reusable, dicapai menggunakan React.js dan Tailwind CSS untuk desktop maupun mobile-first.",
     href: "https://github.com/Rifatdhy/Clash-Soccer",
+    demo: "https://clash-soccer.vercel.app",
     techs: ["React", "TailwindCSS", "JavaScript"],
   },
   {

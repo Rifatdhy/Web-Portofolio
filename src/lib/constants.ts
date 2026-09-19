@@ -3,7 +3,10 @@ export const SITE = {
   title: "Web, App & Network Engineer",
   description:
     "Portofolio Rifat Dhiya Ul Lail, mahasiswa Teknik Informatika Jakarta Global University dengan kemampuan seimbang di pengembangan web, aplikasi desktop & mobile, jaringan komputer, dan IT support.",
-  url: "https://rifatdhy.my.id",
+  // Must be the host that actually serves 200. The apex domain 308-redirects
+  // to www, and scrapers don't follow redirects for og:image — a mismatch
+  // here silently breaks link previews.
+  url: "https://www.rifatdhy.my.id",
   email: "rifatdhiyaullail@gmail.com",
   emailCompose:
     "https://mail.google.com/mail/?view=cm&fs=1&to=rifatdhiyaullail@gmail.com&su=Kolaborasi%20dari%20Portofolio",

@@ -5,6 +5,7 @@ import { SITE } from "@/lib/constants";
 export const metadata: Metadata = {
   title: `Kebijakan Privasi | ${SITE.name}`,
   description: `Kebijakan privasi situs portofolio ${SITE.name} — data yang dikumpulkan dan hak Anda.`,
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {
