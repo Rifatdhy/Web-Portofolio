@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE, SOCIAL } from "@/lib/constants";
 import { Footer } from "@/components/layout/Footer";
 import { ProgressBar } from "@/components/layout/ProgressBar";
+import { BackToTop } from "@/components/layout/BackToTop";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { BackgroundPixelStars } from "@/components/ui/background-pixel-stars";
 import { LiquidAmbient } from "@/components/ui/LiquidAmbient";
@@ -101,6 +102,7 @@ export default function RootLayout({
           Loncat ke konten utama
         </a>
         <ProgressBar />
+        <BackToTop />
         <BackgroundPixelStars />
         <LiquidAmbient />
         <SmoothScroll>

@@ -201,14 +201,13 @@ html.lenis, html.lenis body {
 .skill-cell img, .skill-cell svg {
   width: 1.75rem;
   height: 1.75rem;
-  filter: grayscale(1) contrast(0.8);
-  opacity: 0.9;
+  opacity: 1;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease;
   will-change: transform;
 }
 .skill-cell:hover img, .skill-cell:hover svg {
   transform: scale(1.1);
-  filter: grayscale(0) contrast(1) brightness(1.4);
+  filter: brightness(1.2);
 }
 .skill-cell span {
   font-size: 0.6875rem;
@@ -560,7 +559,7 @@ h1, h2, h3 { text-wrap: balance; }
   .scroll-reveal { opacity: 1 !important; transform: none !important; transition: none !important; filter: none !important; }
   .skill-cell { opacity: 1 !important; transform: none !important; }
   .skill-cell:hover { transform: none; box-shadow: none; }
-  .skill-cell img, .skill-cell svg { transform: none; filter: grayscale(0) contrast(1) brightness(1.2); }
+  .skill-cell img, .skill-cell svg { transform: none; }
   .project-card, .contact-card, .edu-card, .cv-card { box-shadow: none !important; }
 }
 @media print {

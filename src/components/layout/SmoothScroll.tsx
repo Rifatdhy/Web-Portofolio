@@ -47,17 +47,23 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       };
       rafId = requestAnimationFrame(raf);
 
-      // Smooth anchor navigation
+      // Smooth anchor navigation (both "#hash" and same-page "/#hash" links)
       const handleAnchorClick = (e: MouseEvent) => {
         const target = (e.target as HTMLElement).closest("a");
         if (!target) return;
 
         const href = target.getAttribute("href");
-        if (href && href.startsWith("#") && href.length > 1) {
-          const element = document.querySelector(href);
+        if (!href) return;
+        const hash = href.startsWith("#")
+          ? href
+          : href.startsWith("/#")
+            ? href.slice(1)
+            : null;
+        if (hash && hash.length > 1) {
+          const element = document.querySelector(hash);
           if (element) {
             e.preventDefault();
-            lenis?.scrollTo(href, {
+            lenis?.scrollTo(hash, {
               offset: -40,
               duration: 1.4,
               easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

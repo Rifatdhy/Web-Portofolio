@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 
 const roles = ["Web & App Developer", "Network Engineer", "IT Support"];
@@ -10,6 +10,9 @@ const roles = ["Web & App Developer", "Network Engineer", "IT Support"];
 export function Hero() {
   const reduce = useReducedMotionSafe();
   const [roleIdx, setRoleIdx] = useState(0);
+  const { scrollY } = useScroll();
+  const glowY = useTransform(scrollY, [0, 700], [0, 140]);
+  const glowOpacity = useTransform(scrollY, [0, 700], [0.6, 0]);
 
   useEffect(() => {
     const id = setInterval(() => setRoleIdx((i) => (i + 1) % roles.length), 2600);
@@ -25,7 +28,14 @@ export function Hero() {
     >
       {/* Decorative parallax glow */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-1/4 h-[420px] w-[680px] -translate-x-1/2 rounded-full bg-radial-soft opacity-60 blur-3xl" />
+        {reduce ? (
+          <div className="absolute left-1/2 top-1/4 h-[420px] w-[680px] -translate-x-1/2 rounded-full bg-radial-soft opacity-60 blur-3xl" />
+        ) : (
+          <motion.div
+            style={{ y: glowY, x: "-50%", opacity: glowOpacity }}
+            className="absolute left-1/2 top-1/4 h-[420px] w-[680px] rounded-full bg-radial-soft blur-3xl"
+          />
+        )}
       </div>
 
       <div className="relative max-w-6xl mx-auto px-6 w-full">

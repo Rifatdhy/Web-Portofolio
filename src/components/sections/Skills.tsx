@@ -19,7 +19,7 @@ export function Skills() {
   };
 
   function colsFor(count: number): string {
-    if (count % 4 === 0) return colMap[4]!;
+    if (count % 4 === 0 || count > 8) return colMap[4]!;
     if (count % 3 === 0) return colMap[3]!;
     return colMap[2]!;
   }
@@ -37,19 +37,12 @@ export function Skills() {
           </div>
         </Reveal>
 
-        <div className="grid md:grid-cols-12 gap-4 md:gap-5">
+        <div className="grid md:grid-cols-2 gap-4 md:gap-5">
           {skillCategories.map((cat, catIdx) => {
             const pastelClass = pastelColors[catIdx] || "pastel-blue";
             return (
               <Reveal
                 key={cat.name}
-                className={
-                  catIdx === 0
-                    ? "md:col-span-7"
-                    : catIdx === 1
-                      ? "md:col-span-5"
-                      : "md:col-span-6"
-                }
                 style={{ transitionDelay: `${catIdx * 0.08}s` }}
               >
                 <div>

@@ -1,8 +1,43 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import { animate, useInView } from "motion/react";
 import { education } from "@/lib/data";
 import { SITE } from "@/lib/constants";
+import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { Reveal } from "../magic/Reveal";
+
+function StatNum({ value }: { value: string }) {
+  const reduce = useReducedMotionSafe();
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || !inView || reduce) return;
+    const match = value.match(/^(\d+)(.*)$/);
+    if (!match) return;
+    const target = Number(match[1]);
+    const suffix = match[2];
+    const controls = animate(0, target, {
+      duration: 1.4,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (v) => {
+        node.textContent = `${Math.round(v)}${suffix}`;
+      },
+    });
+    return () => controls.stop();
+  }, [inView, reduce, value]);
+
+  return (
+    <span
+      ref={ref}
+      className="block font-display text-3xl md:text-4xl font-bold tracking-tight tabular-nums text-[var(--color-text-primary)]"
+    >
+      {value}
+    </span>
+  );
+}
 
 export function About() {
   const items = [
@@ -37,9 +72,7 @@ export function About() {
               <div className="grid grid-cols-3 divide-x divide-[var(--color-border)] border-y border-[var(--color-border)] py-8 mb-12">
                 {items.map((stat) => (
                   <div key={stat.label} className="px-4 first:pl-0">
-                    <span className="block font-display text-3xl md:text-4xl font-bold tracking-tight text-[var(--color-text-primary)]">
-                      {stat.num}
-                    </span>
+                    <StatNum value={stat.num} />
                     <span className="block mt-1 text-xs text-secondary">
                       {stat.label}
                     </span>
