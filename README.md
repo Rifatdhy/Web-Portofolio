@@ -89,6 +89,23 @@ tidak dapat dipercaya).
 tambahkan field `image` di `Project` beserta gambarnya kalau screenshot sudah
 tersedia.
 
+## Dependabot
+
+`minor`/`patch` dikelompokkan jadi satu PR mingguan. Dua bump `major` sengaja
+di-`ignore` di `.github/dependabot.yml` — bukan karena malas, tapi karena
+keduanya merusak:
+
+- **`@types/node`** harus mengikuti major runtime di `.node-version` (22).
+  Bump ke 26 membuat tipe mendeskripsikan API Node 26 yang tidak ada di
+  runtime — `typecheck` hijau, produksi bisa gagal.
+- **`eslint` 10** belum didukung `eslint-config-next@16`: plugin transitif
+  `eslint-plugin-react@^7` masih memanggil `context.getFilename()` yang dihapus
+  di ESLint 10, sehingga `npm run lint` mati dengan
+  `contextOrFilename.getFilename is not a function`.
+
+Hapus entri `ignore` yang bersangkutan begitu runtime naik / `eslint-config-next`
+mendukung ESLint 10.
+
 ## Konvensi
 
 - **Dark-only, zero accent color.** Hierarki dibawa tipografi, spacing, dan
