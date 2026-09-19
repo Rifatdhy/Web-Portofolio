@@ -17,3 +17,8 @@ out/
 .freebuff/
 home-mobile.png
 *.tgz
+
+# Vendored agent tooling — local only, not part of the app
+.agents/
+.opencode/
+skills-lock.json
