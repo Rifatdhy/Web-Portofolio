@@ -15,24 +15,16 @@
   --color-text-secondary: #a1a1a6;
   --color-text-muted: #8a8a91;
 
-  --color-brand-500: #f5f5f7;
-  --color-brand-600: #d1d1d6;
   --color-brand-50: rgba(245, 245, 247, 0.06);
-
-  --shadow-tint: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-card: 0 20px 48px rgba(0, 0, 0, 0.35);
-  --shadow-button: 0 8px 20px rgba(0, 0, 0, 0.4);
-  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.25);
 
   --glow-radial: rgba(245, 245, 247, 0.05);
 }
 
 /* --- Z-INDEX SCALE --- */
+/* z-1:   starfield canvas */
+/* z-2:   liquid ambient blobs */
 /* z-10:  base content, sections */
-/* z-20:  ambient blobs, decorative */
-/* z-30:  sticky elements */
-/* z-40:  mobile menu, noise overlay */
-/* z-50:  nav */
+/* z-50:  back-to-top */
 /* z-60:  progress bar */
 /* z-70:  skip link, modals */
 /* --------------------- */

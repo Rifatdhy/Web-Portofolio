@@ -38,7 +38,7 @@ export function Experience() {
                           style={{ color: "var(--color-text-secondary)" }}
                         >
                           {exp.company}
-                          {exp.period !== "-" ? ` · ${exp.period}` : ""}
+                          {exp.period ? ` · ${exp.period}` : ""}
                         </p>
                         <p
                           className="text-sm leading-relaxed mt-2"

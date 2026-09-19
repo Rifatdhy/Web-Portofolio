@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { animate, useInView } from "motion/react";
-import { education } from "@/lib/data";
+import { aboutParagraphs, education } from "@/lib/data";
 import { SITE } from "@/lib/constants";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { Reveal } from "../magic/Reveal";
@@ -81,53 +81,21 @@ export function About() {
               </div>
             </Reveal>
 
-            <Reveal className="max-w-prose">
-              <p
-                className="mt-6 leading-relaxed"
-                style={{ color: "var(--color-text-primary)" }}
-              >
-                Halo, saya Rifat — mahasiswa S1 Teknik Informatika di Jakarta
-                Global University dengan latar belakang Teknik Komputer dan
-                Jaringan. Saya membangun aplikasi sekaligus memahami
-                infrastruktur di baliknya: dari kode frontend sampai
-                konektivitas jaringan.
-              </p>
-            </Reveal>
-
-            <Reveal className="max-w-prose">
-              <p className="mt-4 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                Di sisi software, saya bekerja di ekosistem
-                JavaScript/TypeScript — React dan Next.js untuk antarmuka
-                yang responsif, Tailwind CSS untuk UI yang konsisten, serta
-                Laravel (PHP/MySQL) dan Node.js untuk REST API, pengelolaan database,
-                dan integrasi frontend-backend. Saya juga berpengalaman
-                membangun aplikasi desktop dengan Java dan aplikasi mobile
-                dengan Flutter.
-              </p>
-            </Reveal>
-
-            <Reveal className="max-w-prose">
-              <p className="mt-4 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                Di sisi infrastruktur, saya memahami TCP/IP, LAN & WAN,
-                routing dan switching, VLAN, DHCP, DNS, dan NAT, terbiasa
-                konfigurasi jaringan dengan MikroTik RouterOS dan Cisco,
-                serta troubleshooting perangkat, konektivitas, dan
-                administrasi sistem Linux. Workflow saya didukung Git dan
-                GitHub, dengan MySQL dan PostgreSQL untuk data serta
-                eksplorasi Docker menuju pengembangan yang lebih
-                terstruktur dan scalable.
-              </p>
-            </Reveal>
-
-            <Reveal className="max-w-prose">
-              <p className="mt-4 leading-relaxed" style={{ color: "var(--color-text-secondary)" }}>
-                Saya senang mempelajari teknologi baru lewat proyek akademik
-                maupun personal — saat ini fokus memperdalam TypeScript,
-                full-stack modern, UI/UX, serta cloud dan deployment, agar
-                aplikasi yang saya buat tidak hanya berfungsi dengan baik,
-                tetapi juga nyaman dipakai.
-              </p>
-            </Reveal>
+            {aboutParagraphs.map((para, i) => (
+              <Reveal key={i} className="max-w-prose">
+                <p
+                  className={i === 0 ? "mt-6 leading-relaxed" : "mt-4 leading-relaxed"}
+                  style={{
+                    color:
+                      para.tone === "primary"
+                        ? "var(--color-text-primary)"
+                        : "var(--color-text-secondary)",
+                  }}
+                >
+                  {para.text}
+                </p>
+              </Reveal>
+            ))}
           </div>
         </div>
 
@@ -179,8 +147,7 @@ export function About() {
             </div>
           </div>
         </div>
-
-        </div>
+      </div>
     </section>
   );
 }

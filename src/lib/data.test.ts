@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { existsSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 import { allTechs, projects, skillCategories } from "./data";
+import { SITE } from "./constants";
 
 const iconsDir = resolve(process.cwd(), "public", "icons");
 
@@ -32,16 +33,12 @@ describe("data integrity", () => {
     }
   });
 
-  it("project images reference existing files in public/", () => {
-    for (const p of projects) {
-      if (p.image !== undefined) {
-        const filePath = resolve(
-          process.cwd(),
-          "public",
-          p.image.replace(/^\//, ""),
-        );
-        expect(existsSync(filePath), `${p.image} missing`).toBe(true);
-      }
-    }
+  it("SITE.cvPath points at a real file in public/", () => {
+    const filePath = resolve(
+      process.cwd(),
+      "public",
+      decodeURIComponent(SITE.cvPath).replace(/^\//, ""),
+    );
+    expect(existsSync(filePath), `${SITE.cvPath} missing`).toBe(true);
   });
 });

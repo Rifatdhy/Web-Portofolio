@@ -19,7 +19,7 @@ export function Contact() {
         <Reveal>
           <div className="max-w-2xl mx-auto text-center">
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted inline-flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-current" />
               Tersedia untuk diskusi
             </span>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance leading-tight mt-4">
@@ -97,7 +97,7 @@ export function Contact() {
                 />
               </a>
               <a
-                href="/assets/CV%20Rifat%20Dhiya_IT%20Intern.pdf"
+                href={SITE.cvPath}
                 download
                 className="group contact-card"
               >

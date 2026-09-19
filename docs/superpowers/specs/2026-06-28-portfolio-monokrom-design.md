@@ -40,21 +40,28 @@ CTA primer menggunakan warna inverted: bg `--color-text-primary`, teks `--color-
 ## Route Structure
 | Route | File | Konten |
 |-------|------|--------|
-| `/` | app/page.tsx | Hero → About → Projects → Skills → Contact |
-| `/proyek` | app/proyek/page.tsx | Full project list + filter tech |
+| `/` | app/page.tsx | Hero → About → Experience → Projects → Skills → Contact |
+| `/proyek` | app/proyek/page.tsx (+ `ProjectFilter.tsx`) | Full project list + filter tech |
 | `/cv` | app/cv/page.tsx | Online CV + contact cards + ringkasan |
 | `/privacy` | app/privacy/page.tsx | Kebijakan privasi (tanpa form) |
 | `404` | app/not-found.tsx | Halaman tidak ditemukan |
 
-Sitemap hanya memuat URL halaman nyata (tanpa fragment `#`).
+Sitemap memuat `/`, `/proyek`, `/cv`, `/privacy` — tanpa fragment `#`.
+
+**Akses antar halaman:** nav dihapus (Sep 2026); link ke `/proyek`, `/cv`, dan
+`/privacy` disediakan lewat `<nav>` di Footer. Halaman baru harus ditambahkan
+ke `pageLinks` di `Footer.tsx` **dan** ke `sitemap.ts`.
 
 ## Homepage Sections
-1. Hero — staggered word reveal + role rotator + CTA
-2. About — split layout + stat + narasi + education timeline
-3. Projects — grid 2 kolom + tech filter bar (client-side `useState`)
-4. Skills — grid per kategori + cell stagger via IntersectionObserver
-5. Contact — contact cards (WhatsApp, Email, CV, GitHub) + social links
-6. Footer
+1. Hero — nama statis (LCP) + role rotator + CTA
+2. About — split layout + stat + narasi (dari `aboutParagraphs`) + education timeline
+3. Experience — timeline pengalaman (volunteer/internship)
+4. Projects — grid 2 kolom kartu proyek (monogram fallback)
+5. Skills — grid per kategori + cell stagger via IntersectionObserver
+6. Contact — contact cards (WhatsApp, Email, CV, GitHub) + social links
+7. Footer — copyright + nav halaman + social links
+
+Filter tech hanya ada di `/proyek` (bukan di homepage).
 
 ## Motion
 - Page enter (template): opacity/translateY, 0.35s

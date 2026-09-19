@@ -60,13 +60,13 @@ Hierarki visual dibawa oleh tipografi, spacing, dan kontras — bukan warna.
 
 **Zero accent color.** Jangan menambahkan warna aksen (biru/hijau/merah) kecuali ikon brand pihak ketiga dan logo sosial.
 
-**Glow ambient (`bg-radial-soft`) — dose cap 2:** hanya di hero (glow dekoratif) dan section kontak (penutup halaman). Section konten (About, Projects, Skills) flat. Ikon panah `↗` hanya untuk link eksternal; link internal tanpa panah. Tidak ada animasi loop abadi — semua motion berpemicu scroll/hover/klik atau one-shot reveal.
+**Glow ambient (`bg-radial-soft`) — dose cap 1:** hanya di hero (glow dekoratif ber-parallax). Section konten (About, Experience, Projects, Skills) dan kontak flat — glow kontak dihapus karena memunculkan tepi kotak gradien yang terlihat. Ikon panah `↗` hanya untuk link eksternal; link internal tanpa panah. Tidak ada animasi loop abadi pada **elemen UI** — semua motion foreground berpemicu scroll/hover/klik atau one-shot reveal. Pengecualiannya hanya dua layer background (`BackgroundPixelStars` dan `LiquidAmbient`) yang memang bergerak kontinu; keduanya di-nonaktifkan saat `prefers-reduced-motion`.
 
 ## Typography
 
 | Role | Font | Weight | Source |
 |------|------|--------|--------|
-| Display/Headline | Outfit | 400, 500, 600, 700, 800 | Google Fonts (next/font) |
+| Display/Headline | Outfit | 400, 500, 600, 700 | Google Fonts (next/font) |
 | Body | DM Sans | 400, 500, 600, 700 | Google Fonts (next/font) |
 | Mono/Code | JetBrains Mono | 400, 500 | Google Fonts (next/font) |
 

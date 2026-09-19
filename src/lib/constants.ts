@@ -11,6 +11,9 @@ export const SITE = {
   location: "Jakarta Global University",
   major: "S1 Teknik Informatika",
   batch: "2024",
+  // Single source of truth for the CV download path. Always URL-encoded so
+  // raw and encoded call sites can't drift apart.
+  cvPath: "/assets/CV%20Rifat%20Dhiya%20Ul%20Lail.pdf",
 };
 
 export const SOCIAL = {

@@ -15,9 +15,32 @@ export function Hero() {
   const glowOpacity = useTransform(scrollY, [0, 700], [0.6, 0]);
 
   useEffect(() => {
-    const id = setInterval(() => setRoleIdx((i) => (i + 1) % roles.length), 2600);
-    return () => clearInterval(id);
-  }, []);
+    if (reduce) return;
+    let id: ReturnType<typeof setInterval> | null = null;
+
+    const start = () => {
+      if (id === null) {
+        id = setInterval(() => setRoleIdx((i) => (i + 1) % roles.length), 2600);
+      }
+    };
+    const stop = () => {
+      if (id !== null) {
+        clearInterval(id);
+        id = null;
+      }
+    };
+
+    // Don't rotate while the tab is hidden — the interval would keep
+    // scheduling re-renders that nobody can see.
+    const onVisibility = () => (document.hidden ? stop() : start());
+
+    start();
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      stop();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [reduce]);
 
   const nameWords = ["Rifat", "Dhiya", "Ul Lail"];
 

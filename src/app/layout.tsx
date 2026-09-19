@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Outfit, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -52,13 +52,20 @@ export const metadata: Metadata = {
   authors: [{ name: SITE.name }],
 };
 
+// themeColor belongs in the `viewport` export — the `metadata.themeColor`
+// option was deprecated in Next.js 14.
+export const viewport: Viewport = {
+  themeColor: "#0b0b0d",
+  colorScheme: "dark",
+};
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: SITE.name,
   url: SITE.url,
   jobTitle: SITE.title,
-  almaMater: "Jakarta Global University",
+  alumniOf: "Jakarta Global University",
   knowsAbout: [
     "Web Development",
     "Desktop Application Development",
@@ -88,7 +95,14 @@ export default function RootLayout({
     >
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="theme-color" content="#0b0b0d" />
+        {/* Without JS the scroll-reveal / Motion elements would stay at
+            opacity:0, leaving the page blank. Force everything visible. */}
+        <noscript>
+          <style>{`
+            .scroll-reveal, .skill-cell { opacity: 1 !important; transform: none !important; }
+            [style*="opacity:0;"], [style$="opacity:0"] { opacity: 1 !important; transform: none !important; }
+          `}</style>
+        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
