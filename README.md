@@ -81,6 +81,10 @@ Jadi tambahkan juga file SVG ikonnya, dan pastikan `allTechs` ikut diperbarui.
 `src/components/layout/Footer.tsx` **dan** ke `src/app/sitemap.ts`. Nav dihapus
 pada Sep 2026; footer adalah satu-satunya jalur navigasi antar halaman.
 
+**Tanggal `lastmod` sitemap** sengaja tidak diisi — lihat komentar di
+`src/app/sitemap.ts` untuk alasannya (clone shallow membuat `git log -- <path>`
+tidak dapat dipercaya).
+
 **Gambar proyek** — belum dipakai. Kartu proyek memakai monogram fallback;
 tambahkan field `image` di `Project` beserta gambarnya kalau screenshot sudah
 tersedia.
