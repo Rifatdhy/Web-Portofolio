@@ -113,10 +113,10 @@ export default function CVPage() {
             <div className="space-y-5">
               {experiences.map((exp) => (
                 <div key={exp.company}>
-                  <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-start justify-between flex-wrap gap-4">
                     <h4 className="font-semibold">{exp.position}</h4>
                     {exp.period && (
-                      <p className="text-sm whitespace-nowrap" style={{ color: "var(--color-text-muted)" }}>
+                      <p className="text-sm whitespace-nowrap ml-auto" style={{ color: "var(--color-text-muted)" }}>
                         {exp.period}
                       </p>
                     )}

@@ -128,14 +128,16 @@ Hierarki visual dibawa oleh tipografi, spacing, dan kontras — bukan warna.
 | Property | Value |
 |----------|-------|
 | Background | `linear-gradient(135deg, rgba(25, 25, 32, 0.72) 0%, rgba(15, 15, 20, 0.52) 100%)` |
-| Backdrop Blur | `backdrop-filter: blur(18px-20px) saturate(150%-160%)` |
+| Backdrop Blur | `backdrop-filter: blur(18px-20px) saturate(150%-160%)` — **hanya kartu besar** (`.project-card`, `.edu-card`, `.contact-card`, `.cv-card`) |
 | Border | `1px solid rgba(255, 255, 255, 0.08)` (specular highlight tepi atas `inset 0 1px 1px rgba(255, 255, 255, 0.14)`) |
 | Hover | `translateY(-2px s.d. -4px)` + border ke `rgba(255, 255, 255, 0.22)` + ambient glare & depth shadow |
 
+> **Anggaran performa (terukur).** Permukaan kecil — `.badge`, `.filter-pill`, `.skill-cell`, `.social-link` — sengaja **tanpa** `backdrop-filter`: tiap permukaan blur = satu layer compositing + sampling ulang backdrop tiap frame scroll, dan uji pixel-diff membuktikan menghapusnya tidak terlihat (beranda: 73 layer blur → 14). `will-change` tidak dipakai di mana pun (52 promosi permanen sebelumnya tidak memberi manfaat). Keyframes orb transform-only — animasi `border-radius` = paint animation yang me-raster ulang 3 blob besar tiap frame (diff morph lama vs radius statis: maks 3/255). Hasil terukur: kerja main-thread saat scroll turun 33%, layout 95 → 21.
+
 ### Background Layers (Starfield + Liquid Ambient)
 1. **Canvas Starfield (`BackgroundPixelStars`):** `fixed inset-0 z-[1]`, bintang monokrom kelap-kelip 16fps.
-2. **Liquid Ambient (`LiquidAmbient`):** `fixed inset-0 z-[2]`, fluid organic blobs monokrom halus yang bergerak lambat di balik kaca.
-3. **Content (`main`):** `relative z-10`, section transparan dengan kartu Liquid Glass semi-transparan yang membiaskan cahaya di baliknya.
+2. **Liquid Ambient (`LiquidAmbient`):** `fixed inset-0 z-[2]`, fluid organic blobs monokrom halus yang bergerak lambat di balik kaca. Blur orb dibatasi `blur(24px)` — diukur: `blur(90px)` menjatuhkan scroll ke ~23fps (HP) / ~14fps (desktop 1440), dan `will-change` pada orb justru memperburuk. Animasi keyframes **transform-only** (translate/rotate/scale): `border-radius` kini statis di `.animate-liquid-*` karena mem-morph-nya = paint animation mahal dan diff-nya tak terlihat (maks 3/255); saat reduced motion orb tetap bulat penuh. Jangan tulis `-webkit-backdrop-filter` manual; Lightning CSS menambahkannya sendiri (lihat komentar di `globals.css`).
+3. **Content (`main` + `footer`):** `relative z-10`, section transparan dengan kartu Liquid Glass semi-transparan yang membiaskan cahaya di baliknya. Keduanya wajib `z-10`: elemen positioned ber-z-index positif (canvas `z-1`, orb `z-2`) melukis **di atas** konten non-positioned, jadi tanpa ini teks footer tertimpa orb.
 
 ### Form Input
 > Contact form saat ini dihapus (Juni 2026). Token ini dipertahankan untuk penggunaan di masa depan.
