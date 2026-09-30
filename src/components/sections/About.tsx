@@ -71,9 +71,9 @@ export function About() {
             <Reveal>
               <div className="grid grid-cols-3 divide-x divide-[var(--color-border)] border-y border-[var(--color-border)] py-8 mb-12">
                 {items.map((stat) => (
-                  <div key={stat.label} className="px-4 first:pl-0">
+                  <div key={stat.label} className="px-3 sm:px-4 first:pl-0">
                     <StatNum value={stat.num} />
-                    <span className="block mt-1 text-xs text-secondary">
+                    <span className="block mt-1 text-xs text-secondary break-words">
                       {stat.label}
                     </span>
                   </div>

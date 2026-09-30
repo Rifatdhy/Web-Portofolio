@@ -8,6 +8,9 @@ import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 interface ProjectCardProps {
   project: Project;
   index: number;
+  /** Heading level for the card title. `/proyek` lists cards directly under its
+   *  `h1`, so it passes 2; the homepage nests them under a section `h2`. */
+  headingLevel?: 2 | 3;
 }
 
 function monogram(title: string): string {
@@ -20,8 +23,9 @@ function monogram(title: string): string {
     .toUpperCase();
 }
 
-export function ProjectCard({ project, index }: ProjectCardProps) {
+export function ProjectCard({ project, index, headingLevel = 3 }: ProjectCardProps) {
   const reduce = useReducedMotionSafe();
+  const Heading = `h${headingLevel}` as "h2" | "h3";
 
   return (
     <motion.article
@@ -48,9 +52,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
       </div>
       <div className="flex grow flex-col gap-4 p-6 md:p-8">
-        <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight leading-tight">
+        <Heading className="font-display text-2xl md:text-3xl font-bold tracking-tight leading-tight">
           {project.title}
-        </h3>
+        </Heading>
         <p className="leading-relaxed text-sm text-secondary">
           {project.description}
         </p>

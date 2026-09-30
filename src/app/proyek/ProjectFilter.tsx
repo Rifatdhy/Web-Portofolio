@@ -44,7 +44,7 @@ export function ProjectFilter() {
           <LayoutGroup>
             <AnimatePresence>
               {filtered.map((project, i) => (
-                <ProjectCard key={project.title} project={project} index={i} />
+                <ProjectCard key={project.title} project={project} index={i} headingLevel={2} />
               ))}
             </AnimatePresence>
           </LayoutGroup>
