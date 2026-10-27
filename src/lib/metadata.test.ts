@@ -3,7 +3,9 @@ import { metadata as proyekMetadata } from "../app/proyek/page";
 import { metadata as cvMetadata } from "../app/cv/page";
 import { metadata as privacyMetadata } from "../app/privacy/page";
 import { SITE } from "./constants";
+import { projects } from "./data";
 import { buildPageMetadata } from "./metadata";
+import sitemap from "../app/sitemap";
 
 describe("page metadata", () => {
   it("builds title, canonical, Open Graph, and Twitter fields from one input", () => {
@@ -48,5 +50,13 @@ describe("page metadata", () => {
     expect(privacyMetadata.twitter?.title).toBe(
       `Kebijakan Privasi | ${SITE.name}`,
     );
+  });
+
+  it("includes every project detail URL in the sitemap", () => {
+    const urls = sitemap().map((entry) => entry.url);
+
+    for (const project of projects) {
+      expect(urls).toContain(`${SITE.url}/proyek/${project.slug}`);
+    }
   });
 });
