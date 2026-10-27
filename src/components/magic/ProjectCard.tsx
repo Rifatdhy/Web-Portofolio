@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { ArrowUpRight, GithubLogo } from "@phosphor-icons/react";
 import { Project } from "@/lib/data";
@@ -42,15 +43,31 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         aria-hidden="true"
         className="pointer-events-none absolute -inset-px z-10 rounded-[20px] bg-gradient-to-b from-white/[0.08] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
       />
-      <div className="relative aspect-video overflow-hidden border-b border-white/10">
-        <div
-          aria-hidden="true"
-          className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white/[0.07] via-transparent to-transparent"
-        >
-          <span className="font-display text-6xl font-bold tracking-tight text-white/15 select-none">
-            {monogram(project.title)}
-          </span>
-        </div>
+      <div className="relative aspect-video overflow-hidden border-b border-white/10 bg-[var(--color-surface)]">
+        {project.image ? (
+          <>
+            <Image
+              src={project.image}
+              alt={`Pratinjau proyek ${project.title}`}
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover opacity-90 motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-[1.02]"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--color-surface)]/55 via-transparent to-transparent"
+            />
+          </>
+        ) : (
+          <div
+            aria-hidden="true"
+            className="flex h-full w-full items-center justify-center bg-gradient-to-br from-white/[0.07] via-transparent to-transparent"
+          >
+            <span className="font-display text-6xl font-bold tracking-tight text-white/15 select-none">
+              {monogram(project.title)}
+            </span>
+          </div>
+        )}
       </div>
       <div className="flex grow flex-col gap-4 p-6 md:p-8">
         <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight leading-tight">
@@ -73,9 +90,12 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"
-              aria-label={`Buka demo live proyek ${project.title}`}
             >
               Live Demo
+              <span className="sr-only">
+                {" "}
+                — demo {project.title} (dibuka di tab baru)
+              </span>
               <ArrowUpRight aria-hidden="true" weight="bold" />
             </a>
           )}
@@ -84,10 +104,13 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-outline"
-            aria-label={`Lihat kode proyek ${project.title} di GitHub`}
           >
             <GithubLogo aria-hidden="true" weight="bold" />
             Kode
+            <span className="sr-only">
+              {" "}
+              — {project.title} di GitHub (dibuka di tab baru)
+            </span>
           </a>
         </div>
       </div>

@@ -30,7 +30,7 @@ export default function CVPage() {
         </div>
 
         <div
-          className="p-8 md:p-10 rounded-lg print:border-none"
+          className="p-8 md:p-10 rounded-[18px] print:border-none"
           style={{
             background: "var(--color-surface-card)",
             border: "1px solid var(--color-border)",
@@ -63,8 +63,8 @@ export default function CVPage() {
               <a
                 key={item.label}
                 href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={item.href === SITE.cvPath ? undefined : "_blank"}
+                rel={item.href === SITE.cvPath ? undefined : "noopener noreferrer"}
                 download={
                   item.href === SITE.cvPath
                     ? "CV Rifat Dhiya Ul Lail.pdf"
@@ -77,6 +77,9 @@ export default function CVPage() {
                   <span className="font-display font-semibold">{item.label}</span>
                 </div>
                 <span className="text-sm" style={{ color: "var(--color-text-secondary)" }}>{item.value}</span>
+                {item.href !== SITE.cvPath && (
+                  <span className="sr-only"> (dibuka di tab baru)</span>
+                )}
               </a>
             ))}
           </div>

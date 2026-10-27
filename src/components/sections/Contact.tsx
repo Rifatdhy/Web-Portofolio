@@ -21,7 +21,7 @@ export function Contact() {
               Tersedia untuk diskusi
             </span>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance leading-tight mt-4">
-              Ada project atau ide?
+              Ada proyek atau ide?
             </h2>
             <p
               className="mt-6 leading-relaxed max-w-md mx-auto text-secondary"
@@ -64,6 +64,7 @@ export function Contact() {
                   weight="bold"
                   className="text-sm ml-auto shrink-0 text-muted transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
+                <span className="sr-only"> (dibuka di tab baru)</span>
               </a>
               <a
                 href={SITE.emailCompose}
@@ -93,6 +94,7 @@ export function Contact() {
                   weight="bold"
                   className="text-sm ml-auto shrink-0 text-muted transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
+                <span className="sr-only"> (dibuka di tab baru)</span>
               </a>
               <a
                 href={SITE.cvPath}
@@ -150,6 +152,7 @@ export function Contact() {
                   weight="bold"
                   className="text-sm ml-auto shrink-0 text-muted transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
+                <span className="sr-only"> (dibuka di tab baru)</span>
               </a>
             </div>
           </div>
@@ -157,16 +160,16 @@ export function Contact() {
 
         <Reveal>
           <div className="flex justify-center gap-3 mt-12">
-            <a href={SOCIAL.whatsapp} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="WhatsApp">
+            <a href={SOCIAL.whatsapp} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="WhatsApp (dibuka di tab baru)">
               <WhatsappLogo aria-hidden="true" weight="bold" className="text-xl" />
             </a>
-            <a href={SOCIAL.github} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub">
+            <a href={SOCIAL.github} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub (dibuka di tab baru)">
               <GithubLogo aria-hidden="true" weight="bold" className="text-xl" />
             </a>
-            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn">
+            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn (dibuka di tab baru)">
               <LinkedinLogo aria-hidden="true" weight="bold" className="text-xl" />
             </a>
-            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Instagram">
+            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Instagram (dibuka di tab baru)">
               <InstagramLogo aria-hidden="true" weight="bold" className="text-xl" />
             </a>
           </div>

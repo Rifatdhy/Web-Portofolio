@@ -1,19 +1,37 @@
 "use client";
 
-import { useState } from "react";
 import { AnimatePresence, LayoutGroup } from "motion/react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { projects, allTechs } from "@/lib/data";
 import { ProjectCard } from "@/components/magic/ProjectCard";
 
 const filters = ["Semua", ...allTechs];
 
 export function ProjectFilter() {
-  const [active, setActive] = useState("Semua");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const techParam = searchParams.get("tech");
+  const active =
+    techParam && filters.includes(techParam) ? techParam : "Semua";
 
   const filtered =
     active === "Semua"
       ? projects
       : projects.filter((p) => p.techs.includes(active));
+
+  function setActive(next: string) {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (next === "Semua") {
+      params.delete("tech");
+    } else {
+      params.set("tech", next);
+    }
+
+    const query = params.toString();
+    router.push(query ? `${pathname}?${query}` : pathname, { scroll: false });
+  }
 
   return (
     <>

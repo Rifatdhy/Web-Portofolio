@@ -6,7 +6,7 @@ import { StatNum } from "../magic/StatNum";
 export function About() {
   const items = [
     { num: "2+", label: "Tahun Eksplorasi Web" },
-    { num: "5", label: "Project Publik" },
+    { num: "5", label: "Proyek Publik" },
     { num: "S1", label: "Teknik Informatika" },
   ];
 

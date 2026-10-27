@@ -11,9 +11,18 @@ Thumbs.db
 
 .next/
 out/
+next-env.d.ts
 
 *.tsbuildinfo
 .playwright-mcp/
+
+# Playwright
+/playwright-report/
+/test-results/
+/blob-report/
+
+# Lighthouse (CI artifact, generated locally on demand)
+/lighthouse.json
 .freebuff/
 home-mobile.png
 *.tgz

@@ -4,6 +4,8 @@ export interface Project {
   href: string;
   techs: string[];
   demo?: string;
+  /** Local preview artwork served from `public/`. */
+  image?: string;
 }
 
 export interface Education {
@@ -21,6 +23,18 @@ export interface Experience {
   description: string;
 }
 
+export interface Skill {
+  name: string;
+  slug: string;
+  /** Filename override in `public/icons` when the asset is not `${slug}.svg`. */
+  icon?: string;
+}
+
+export interface SkillCategory {
+  name: string;
+  skills: Skill[];
+}
+
 /** Short one-paragraph summary — used as the "Ringkasan" block on /cv. */
 export const about = "Mahasiswa S1 Teknik Informatika di Jakarta Global University dengan latar belakang Teknik Komputer dan Jaringan. Berpengalaman mengembangkan aplikasi web menggunakan React.js, Laravel, PHP, JavaScript, Tailwind CSS, dan MySQL melalui proyek akademik maupun personal. Familiar dengan jaringan komputer meliputi TCP/IP, LAN & WAN, routing dan switching, VLAN, DHCP, DNS, NAT, dan MikroTik RouterOS, serta lingkungan Linux dan troubleshooting IT. Memadukan kemampuan software development dengan networking dan IT support untuk membangun solusi teknologi yang praktis.";
 
@@ -31,19 +45,15 @@ export const about = "Mahasiswa S1 Teknik Informatika di Jakarta Global Universi
 export const aboutParagraphs: { text: string; tone: "primary" | "secondary" }[] = [
   {
     tone: "primary",
-    text: "Halo, saya Rifat — mahasiswa S1 Teknik Informatika di Jakarta Global University dengan latar belakang Teknik Komputer dan Jaringan. Saya membangun aplikasi sekaligus memahami infrastruktur di baliknya: dari kode frontend sampai konektivitas jaringan.",
+    text: "Halo, saya Rifat — mahasiswa S1 Teknik Informatika di Jakarta Global University dengan latar belakang Teknik Komputer dan Jaringan. Saya membangun aplikasi sekaligus memahami infrastruktur di baliknya.",
   },
   {
     tone: "secondary",
-    text: "Di sisi software, saya bekerja di ekosistem JavaScript/TypeScript — React dan Next.js untuk antarmuka yang responsif, Tailwind CSS untuk UI yang konsisten, serta Laravel (PHP/MySQL) dan Node.js untuk REST API, pengelolaan database, dan integrasi frontend-backend. Saya juga berpengalaman membangun aplikasi desktop dengan Java dan aplikasi mobile dengan Flutter.",
+    text: "Di sisi software, saya bekerja dengan React, Next.js, dan Tailwind CSS untuk antarmuka, serta Laravel, Node.js, dan MySQL untuk REST API dan integrasi frontend-backend. Saya juga pernah membangun aplikasi desktop dengan Java dan mobile dengan Flutter.",
   },
   {
     tone: "secondary",
-    text: "Di sisi infrastruktur, saya memahami TCP/IP, LAN & WAN, routing dan switching, VLAN, DHCP, DNS, dan NAT, terbiasa konfigurasi jaringan dengan MikroTik RouterOS dan Cisco, serta troubleshooting perangkat, konektivitas, dan administrasi sistem Linux. Workflow saya didukung Git dan GitHub, dengan MySQL dan PostgreSQL untuk data serta eksplorasi Docker menuju pengembangan yang lebih terstruktur dan scalable.",
-  },
-  {
-    tone: "secondary",
-    text: "Saya senang mempelajari teknologi baru lewat proyek akademik maupun personal — saat ini fokus memperdalam TypeScript, full-stack modern, UI/UX, serta cloud dan deployment, agar aplikasi yang saya buat tidak hanya berfungsi dengan baik, tetapi juga nyaman dipakai.",
+    text: "Di sisi infrastruktur, saya terbiasa dengan TCP/IP, routing & switching, VLAN, DHCP, DNS, NAT, MikroTik RouterOS, troubleshooting IT, dan administrasi Linux. Saat ini saya memperdalam TypeScript, full-stack modern, serta cloud dan deployment.",
   },
 ];
 
@@ -88,30 +98,35 @@ export const projects: Project[] = [
     href: "https://github.com/Rifatdhy/Clash-Soccer",
     demo: "https://clash-soccer.vercel.app",
     techs: ["React", "TailwindCSS", "JavaScript"],
+    image: "/projects/clash-soccer.png",
   },
   {
     title: "ECO RANGERS",
     description: "Aplikasi web tentang kesadaran lingkungan dan gaya hidup berkelanjutan dengan fitur inti dibangun menggunakan PHP dan MySQL serta antarmuka responsif.",
     href: "https://github.com/Rifatdhy/ECO-RANGERS",
     techs: ["PHP", "MySQL", "HTML5", "CSS", "JavaScript"],
+    image: "/projects/eco-rangers.png",
   },
   {
     title: "FINN BUDDY",
     description: "Aplikasi mobile cross-platform yang dibangun dengan Flutter dan Dart, dengan komponen UI reusable, layout responsif untuk berbagai ukuran layar, dan navigasi yang intuitif.",
     href: "https://github.com/Rifatdhy/FINN-BUDDY",
     techs: ["Flutter", "Dart"],
+    image: "/projects/finn-buddy.png",
   },
   {
     title: "NodeVault",
     description: "P2P file sharing dan music streaming terdesentralisasi. Setiap laptop menjadi peer yang menyimpan filenya sendiri. Backend Java SE, frontend vanilla HTML/CSS/JS.",
     href: "https://github.com/Rifatdhy/NodeVault",
     techs: ["Java", "HTML5", "CSS", "JavaScript"],
+    image: "/projects/nodevault.png",
   },
   {
     title: "TODO-List",
     description: "Aplikasi pencatat tugas harian berbasis web, dibangun dengan React, TypeScript, Vite, dan Tailwind CSS.",
     href: "https://github.com/Rifatdhy/TODO-List",
     techs: ["React", "TypeScript", "Vite", "TailwindCSS"],
+    image: "/projects/todo-list.png",
   },
 ];
 
@@ -130,7 +145,7 @@ export const allTechs = [
   "Dart",
 ];
 
-export const skillCategories = [
+export const skillCategories: SkillCategory[] = [
   {
     name: "Programming & Frontend",
     skills: [
@@ -156,7 +171,7 @@ export const skillCategories = [
       { name: "PostgreSQL", slug: "postgresql" },
       { name: "Python", slug: "python" },
       { name: "MySQL", slug: "mysql" },
-      { name: "REST API", slug: "insomnia" },
+      { name: "Insomnia", slug: "insomnia" },
     ],
   },
   {
@@ -178,7 +193,7 @@ export const skillCategories = [
       { name: "Prisma", slug: "prisma" },
       { name: "Postman", slug: "postman" },
       { name: "VS Code", slug: "vscode" },
-      { name: "Winbox", slug: "winbox" },
+      { name: "Winbox", slug: "winbox", icon: "winbox.png" },
     ],
   },
 ];

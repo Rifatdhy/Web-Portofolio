@@ -11,7 +11,8 @@ describe("data integrity", () => {
     const icons = new Set(readdirSync(iconsDir));
     for (const cat of skillCategories) {
       for (const skill of cat.skills) {
-        expect(icons.has(`${skill.slug}.svg`), `${skill.slug}.svg missing`).toBe(true);
+        const icon = skill.icon ?? `${skill.slug}.svg`;
+        expect(icons.has(icon), `${icon} missing`).toBe(true);
       }
     }
   });
@@ -30,6 +31,22 @@ describe("data integrity", () => {
       if (p.demo !== undefined) {
         expect(p.demo).toMatch(/^https?:\/\//);
       }
+    }
+  });
+
+  it("configured project images exist in public/", () => {
+    for (const project of projects) {
+      if (!project.image) continue;
+
+      expect(project.image, project.title).toMatch(
+        /^\/projects\/[a-z0-9-]+\.png$/,
+      );
+      const filePath = resolve(
+        process.cwd(),
+        "public",
+        project.image.replace(/^\//, ""),
+      );
+      expect(existsSync(filePath), `${project.image} missing`).toBe(true);
     }
   });
 

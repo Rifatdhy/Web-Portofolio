@@ -3,26 +3,29 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
-import { Pause, Play } from "@phosphor-icons/react";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 
-const roles = ["Web & App Developer", "Network Engineer", "IT Support"];
+const roles = [
+  "Software Enthusiast",
+  "Network Enthusiast",
+  "IT Support Enthusiast",
+];
 
 export function Hero() {
   const reduce = useReducedMotionSafe();
   const [roleIdx, setRoleIdx] = useState(0);
-  const [paused, setPaused] = useState(false);
   const { scrollY } = useScroll();
   const glowY = useTransform(scrollY, [0, 700], [0, 140]);
   const glowOpacity = useTransform(scrollY, [0, 700], [0.6, 0]);
 
   useEffect(() => {
-    if (reduce || paused) return;
+    // The role rotator intentionally keeps running even when the OS asks for
+    // reduced motion — the owner wants the three interests to stay visible.
     let id: ReturnType<typeof setInterval> | null = null;
 
     const start = () => {
       if (id === null) {
-        id = setInterval(() => setRoleIdx((i) => (i + 1) % roles.length), 2600);
+        id = setInterval(() => setRoleIdx((i) => (i + 1) % roles.length), 1000);
       }
     };
     const stop = () => {
@@ -42,7 +45,7 @@ export function Hero() {
       stop();
       document.removeEventListener("visibilitychange", onVisibility);
     };
-  }, [reduce, paused]);
+  }, []);
 
   const nameWords = ["Rifat", "Dhiya", "Ul Lail"];
 
@@ -75,41 +78,24 @@ export function Hero() {
             ))}
           </h1>
 
-          {/* Static role line: the wrapper must paint immediately (the hero
-              paragraph below is the LCP element). Only the rotating word
-              itself animates. */}
+          {/* The wrapper is static; only the rotating word animates. The
+              rotation is intentionally not gated by reduced-motion because
+              the owner wants all three interests to remain visible. */}
           <div className="mt-6 flex items-center gap-2 font-display text-lg sm:text-2xl text-[var(--color-text-secondary)]">
             <span className="hidden h-px w-8 bg-[var(--color-border-hover)] sm:block" />
-            {!reduce && (
-              <button
-                type="button"
-                onClick={() => setPaused((value) => !value)}
-                aria-label={paused ? "Lanjutkan rotasi teks" : "Jeda rotasi teks"}
-                aria-pressed={paused}
-                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text-primary)]"
-              >
-                {paused ? <Play size={14} weight="fill" /> : <Pause size={14} weight="fill" />}
-              </button>
-            )}
             <span className="relative inline-flex h-[1.6em] overflow-hidden">
-              {reduce ? (
-                <span className="inline-block whitespace-nowrap font-medium text-[var(--color-text-primary)]">
-                  {roles[0]}
-                </span>
-              ) : (
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={roles[roleIdx]}
-                    className="inline-block whitespace-nowrap font-medium text-[var(--color-text-primary)]"
-                    initial={{ opacity: 0, y: "80%" }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: "-80%" }}
-                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    {roles[roleIdx]}
-                  </motion.span>
-                </AnimatePresence>
-              )}
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={roles[roleIdx]}
+                  className="inline-block whitespace-nowrap font-medium text-[var(--color-text-primary)]"
+                  initial={{ opacity: 0, y: "80%" }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: "-80%" }}
+                  transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  {roles[roleIdx]}
+                </motion.span>
+              </AnimatePresence>
             </span>
           </div>
 

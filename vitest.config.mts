@@ -9,5 +9,7 @@ export default defineConfig({
   },
   test: {
     environment: "node",
+    // Playwright owns e2e/*.spec.ts; Vitest only runs unit/component tests.
+    include: ["src/**/*.test.{ts,tsx}"],
   },
 });

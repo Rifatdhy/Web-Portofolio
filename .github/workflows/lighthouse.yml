@@ -1,0 +1,73 @@
+name: Lighthouse
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - "src/**"
+      - "public/**"
+      - "next.config.mjs"
+      - "package.json"
+      - "package-lock.json"
+      - "scripts/check-lighthouse.mjs"
+      - ".github/workflows/lighthouse.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Start production server
+        run: |
+          nohup npm run start -- --port 3000 > /tmp/next.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:3000 >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          cat /tmp/next.log
+          exit 1
+
+      - name: Run Lighthouse
+        # Lighthouse is a workflow-only tool. Keeping it out of package.json
+        # avoids the vulnerable transitive tree that @lhci/cli brings in.
+        run: |
+          npx --yes lighthouse@12.8.2 http://127.0.0.1:3000 \
+            --output=json \
+            --output-path=./lighthouse.json \
+            --chrome-flags="--headless=new --no-sandbox --disable-gpu" \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --quiet
+
+      - name: Check budgets
+        run: node scripts/check-lighthouse.mjs
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: lighthouse.json
+          retention-days: 14

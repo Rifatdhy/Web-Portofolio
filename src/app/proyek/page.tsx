@@ -1,6 +1,9 @@
+import { Suspense } from "react";
 import { SITE } from "@/lib/constants";
+import { projects } from "@/lib/data";
 import { buildPageMetadata } from "@/lib/metadata";
 import { BackLink } from "@/components/layout/BackLink";
+import { ProjectCard } from "@/components/magic/ProjectCard";
 import { ProjectFilter } from "./ProjectFilter";
 
 export const metadata = buildPageMetadata({
@@ -8,6 +11,26 @@ export const metadata = buildPageMetadata({
   description: `Kumpulan proyek ${SITE.name} — aplikasi web, desktop, dan mobile beserta teknologi yang dipakai.`,
   path: "/proyek",
 });
+
+/**
+ * Static fallback used while the URL-aware filter hydrates. Keeping the full
+ * project grid in the server HTML means the list remains crawlable and usable
+ * without JavaScript; the client boundary only adds filtering on top.
+ */
+function ProjectListFallback() {
+  return (
+    <div id="daftar-proyek" aria-labelledby="daftar-proyek-heading">
+      <h2 id="daftar-proyek-heading" className="sr-only">
+        Daftar proyek
+      </h2>
+      <div className="grid md:grid-cols-2 gap-6">
+        {projects.map((project, i) => (
+          <ProjectCard key={project.title} project={project} index={i} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function ProyekPage() {
   return (
@@ -23,7 +46,9 @@ export default function ProyekPage() {
           </h1>
         </div>
 
-        <ProjectFilter />
+        <Suspense fallback={<ProjectListFallback />}>
+          <ProjectFilter />
+        </Suspense>
       </div>
     </div>
   );

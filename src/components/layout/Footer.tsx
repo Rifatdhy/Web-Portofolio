@@ -14,14 +14,14 @@ export function Footer() {
             <FooterNav />
           </div>
           <div className="flex items-center gap-x-2">
-            <a href={SOCIAL.github} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Github">
-              <GithubLogo size={20} />
+            <a href={SOCIAL.github} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="GitHub (dibuka di tab baru)">
+              <GithubLogo aria-hidden="true" size={20} />
             </a>
-            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn">
-              <LinkedinLogo size={20} />
+            <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="LinkedIn (dibuka di tab baru)">
+              <LinkedinLogo aria-hidden="true" size={20} />
             </a>
-            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Instagram">
-              <InstagramLogo size={20} />
+            <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="Instagram (dibuka di tab baru)">
+              <InstagramLogo aria-hidden="true" size={20} />
             </a>
           </div>
         </div>

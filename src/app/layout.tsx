@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SITE, SOCIAL } from "@/lib/constants";
@@ -10,27 +9,6 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { BackgroundPixelStars } from "@/components/ui/background-pixel-stars";
 import { LiquidAmbient } from "@/components/ui/LiquidAmbient";
 import "./globals.css";
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-display",
-  weight: ["500", "600", "700"],
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-body",
-  weight: ["400", "500", "600", "700"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-mono",
-  weight: ["400"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -55,7 +33,7 @@ export const metadata: Metadata = {
 // themeColor belongs in the `viewport` export — the `metadata.themeColor`
 // option was deprecated in Next.js 14.
 export const viewport: Viewport = {
-  themeColor: "#0b0b0d",
+  themeColor: "#000000",
   colorScheme: "dark",
 };
 
@@ -65,10 +43,21 @@ const jsonLd = {
   name: SITE.name,
   url: SITE.url,
   jobTitle: SITE.title,
+  description: SITE.description,
+  email: SITE.email,
+  // City-level only: enough for structured data without publishing a home
+  // address. Matches the location shown on /cv.
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Depok",
+    addressRegion: "Jawa Barat",
+    addressCountry: "ID",
+  },
   alumniOf: {
     "@type": "CollegeOrUniversity",
     name: "Jakarta Global University",
   },
+  knowsLanguage: ["id", "en"],
   knowsAbout: [
     "Web Development",
     "Desktop Application Development",
@@ -92,10 +81,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="id"
-      className={`${outfit.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
-    >
+    <html lang="id">
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         {/* Without JS the scroll-reveal / Motion elements would stay at
@@ -108,7 +94,9 @@ export default function RootLayout({
         </noscript>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+          }}
         />
       </head>
       <body className="antialiased flex flex-col min-h-dvh">

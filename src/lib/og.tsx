@@ -24,7 +24,7 @@ export function renderOgImage({ title, subtitle, footer }: OgImageProps) {
           justifyContent: "center",
           width: "100%",
           height: "100%",
-          background: "linear-gradient(135deg, #0b0b0d 0%, #15151a 100%)",
+          background: "#000000",
           padding: 80,
         }}
       >
@@ -32,9 +32,9 @@ export function renderOgImage({ title, subtitle, footer }: OgImageProps) {
           style={{
             display: "flex",
             fontSize: 72,
-            fontWeight: 800,
+            fontWeight: 700,
             color: "#f5f5f7",
-            letterSpacing: "-0.03em",
+            letterSpacing: "-0.035em",
             textAlign: "center",
           }}
         >
@@ -44,9 +44,10 @@ export function renderOgImage({ title, subtitle, footer }: OgImageProps) {
           style={{
             display: "flex",
             marginTop: 16,
-            fontSize: 32,
+            fontSize: 30,
             color: "#a1a1a6",
-            fontWeight: 500,
+            fontWeight: 400,
+            letterSpacing: "-0.01em",
           }}
         >
           {subtitle}
@@ -58,10 +59,9 @@ export function renderOgImage({ title, subtitle, footer }: OgImageProps) {
               marginTop: 48,
               padding: "12px 32px",
               borderRadius: 999,
-              border: "1px solid #3a3a42",
+              border: "1px solid #2c2c2e",
               fontSize: 22,
-              color: "#8a8a91",
-              fontFamily: "monospace",
+              color: "#86868b",
             }}
           >
             {footer}

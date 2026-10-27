@@ -1,14 +1,55 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import type Lenis from "lenis";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 
 const SCROLL_OFFSET = -40;
 
+function getHashTarget(hash: string): HTMLElement | null {
+  if (!hash || hash.length <= 1) return null;
+
+  let id = hash.slice(1);
+  try {
+    id = decodeURIComponent(id);
+  } catch {
+    // Keep the raw value when the hash contains malformed escapes.
+  }
+
+  return id ? document.getElementById(id) : null;
+}
+
+/**
+ * Move keyboard focus to a hash target without stealing the browser's scroll
+ * position. A programmatic tabindex makes non-interactive sections focusable.
+ */
+function focusHashTarget(hash: string) {
+  const element = getHashTarget(hash);
+  if (!element) return;
+
+  if (!element.hasAttribute("tabindex")) {
+    element.setAttribute("tabindex", "-1");
+  }
+
+  element.focus({ preventScroll: true });
+}
+
+/** Hash links on this page, including Next's `/#section` form on the home page. */
+function hashFromLink(link: HTMLAnchorElement): string | null {
+  const href = link.getAttribute("href");
+  if (!href) return null;
+  if (href.startsWith("#")) return href;
+  if (href.startsWith("/#") && window.location.pathname === "/") {
+    return href.slice(1);
+  }
+  return null;
+}
+
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
   const reduce = useReducedMotionSafe();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (reduce) return;
@@ -62,35 +103,29 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
         const target = (e.target as HTMLElement | null)?.closest("a");
         if (!target) return;
         if (target.target && target.target !== "_self") return;
-
-        const href = target.getAttribute("href");
-        if (!href) return;
+        if (target.hasAttribute("download")) return;
 
         // The skip link must keep native focus + scroll behaviour.
-        if (href === "#main-content") return;
+        const hash = hashFromLink(target);
+        if (!hash || hash === "#main-content") return;
 
-        let hash: string | null = null;
-        if (href.startsWith("#")) {
-          hash = href;
-        } else if (href.startsWith("/#") && window.location.pathname === "/") {
-          hash = href.slice(1);
-        }
-        if (!hash || hash.length <= 1) return;
-
-        const element = document.getElementById(hash.slice(1));
-        if (!element) return;
+        const element = getHashTarget(hash);
+        // If Lenis has not loaded yet, leave the click to the browser.
+        if (!element || !lenis) return;
 
         e.preventDefault();
-        lenis?.scrollTo(element, {
+        const destination = hash;
+        lenis.scrollTo(element, {
           offset: SCROLL_OFFSET,
           duration: 1.4,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           onComplete: () => {
             // Anchor clicks update the URL natively; since preventDefault
             // suppressed that, mirror the hash so deep links still work.
-            if (window.location.hash !== hash) {
-              window.history.pushState(null, "", hash);
+            if (window.location.hash !== destination) {
+              window.history.pushState(null, "", destination);
             }
+            focusHashTarget(destination);
           },
         });
       };
@@ -124,6 +159,62 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       lenisRef.current = null;
     };
   }, [reduce]);
+
+  // Focus is part of navigation, not an optional smooth-scroll extra: this
+  // effect keeps working for reduced motion, deep links, and back/forward.
+  useEffect(() => {
+    const focusFromLocation = () => focusHashTarget(window.location.hash);
+
+    const handleHashChange = () => {
+      // The browser owns scrolling on hash changes; focus after it settles.
+      requestAnimationFrame(focusFromLocation);
+    };
+
+    const handleHashLinkClick = (event: MouseEvent) => {
+      // Next's Link calls preventDefault before the event reaches document,
+      // so defaultPrevented is expected here and must not block focus.
+      if (event.button !== 0) return;
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+        return;
+      }
+
+      const target = (event.target as HTMLElement | null)?.closest("a");
+      if (!target) return;
+      if (target.target && target.target !== "_self") return;
+      if (target.hasAttribute("download")) return;
+
+      const hash = hashFromLink(target);
+      if (!hash || hash === "#main-content") return;
+
+      // Do not preventDefault: Next's Link or the browser owns navigation.
+      // Same-page hash navigation (and Next's pushState) can settle a few
+      // frames later, so poll briefly instead of assuming one fixed delay.
+      const focusWhenSettled = (attempts: number) => {
+        if (window.location.hash === hash) {
+          focusHashTarget(hash);
+          return;
+        }
+
+        if (attempts > 0) {
+          window.setTimeout(() => focusWhenSettled(attempts - 1), 50);
+        }
+      };
+
+      focusWhenSettled(20);
+    };
+
+    // Initial deep link and client-side route changes that carry a fragment.
+    const rafId = requestAnimationFrame(focusFromLocation);
+
+    window.addEventListener("hashchange", handleHashChange);
+    document.addEventListener("click", handleHashLinkClick);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("hashchange", handleHashChange);
+      document.removeEventListener("click", handleHashLinkClick);
+    };
+  }, [pathname]);
 
   return <>{children}</>;
 }
