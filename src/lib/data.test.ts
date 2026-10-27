@@ -43,6 +43,14 @@ describe("data integrity", () => {
     expect(getProjectBySlug("does-not-exist")).toBeUndefined();
   });
 
+  it("every project has case-study content and a validated preview image", () => {
+    for (const project of projects) {
+      expect(project.contribution, `${project.slug} contribution`).toBeTruthy();
+      expect(project.status, `${project.slug} status`).toBeTruthy();
+      expect(project.image, `${project.slug} image`).toBeTruthy();
+    }
+  });
+
   it("configured project images exist in public/", () => {
     for (const project of projects) {
       if (!project.image) continue;

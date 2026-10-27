@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowUpRight, GithubLogo } from "@phosphor-icons/react";
 import { Project } from "@/lib/data";
@@ -71,7 +72,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       </div>
       <div className="flex grow flex-col gap-4 p-6 md:p-8">
         <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight leading-tight">
-          {project.title}
+          <Link href={`/proyek/${project.slug}`} className="transition-colors hover:text-[var(--color-text-secondary)]">
+            {project.title}
+          </Link>
         </h3>
         <p className="leading-relaxed text-sm text-secondary">
           {project.description}
