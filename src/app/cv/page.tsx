@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
 import { SITE, SOCIAL } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/metadata";
 import { about, education, experiences, projects, skillCategories } from "@/lib/data";
+import { BackLink } from "@/components/layout/BackLink";
 import {
   WhatsappLogo,
   At,
@@ -8,16 +9,17 @@ import {
   GithubLogo,
 } from "@phosphor-icons/react/ssr";
 
-export const metadata: Metadata = {
-  title: `Curriculum Vitae | ${SITE.name}`,
+export const metadata = buildPageMetadata({
+  title: "Curriculum Vitae",
   description: `CV ${SITE.name} — ${SITE.title}. Pendidikan, pengalaman, keahlian, dan proyek.`,
-  alternates: { canonical: "/cv" },
-};
+  path: "/cv",
+});
 
 export default function CVPage() {
   return (
     <div className="pt-20 md:pt-24 pb-24 md:pb-32">
       <div className="max-w-4xl mx-auto px-6">
+        <BackLink />
         <div className="mb-12 flex flex-col gap-2">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted">
             Resume
@@ -51,14 +53,25 @@ export default function CVPage() {
             </div>
           </header>
 
-          <div className="mt-8 grid sm:grid-cols-2 gap-3">
+          <div className="mt-8 grid sm:grid-cols-2 gap-3 print:hidden">
             {[
               { href: SOCIAL.whatsapp, label: "WhatsApp", value: SITE.phone, icon: <WhatsappLogo aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
               { href: SITE.emailCompose, label: "Email", value: SITE.email, icon: <At aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
               { href: SITE.cvPath, label: "Download CV", value: "PDF, Rifat Dhiya Ul Lail", icon: <FilePdf aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
               { href: SOCIAL.github, label: "GitHub", value: "@Rifatdhy", icon: <GithubLogo aria-hidden="true" weight="bold" className="text-lg text-secondary" /> },
             ].map((item) => (
-              <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="cv-card">
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                download={
+                  item.href === SITE.cvPath
+                    ? "CV Rifat Dhiya Ul Lail.pdf"
+                    : undefined
+                }
+                className="cv-card"
+              >
                 <div className="flex items-center gap-3">
                   {item.icon}
                   <span className="font-display font-semibold">{item.label}</span>
@@ -133,7 +146,7 @@ export default function CVPage() {
           </section>
 
           <section>
-            <h3 className="font-display text-lg font-bold mb-3">Project</h3>
+            <h3 className="font-display text-lg font-bold mb-3">Proyek</h3>
             <div className="space-y-3">
               {projects.map((project) => (
                 <div key={project.title}>

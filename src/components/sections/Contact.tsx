@@ -1,5 +1,3 @@
-"use client";
-
 import { SITE, SOCIAL } from "@/lib/constants";
 import {
   WhatsappLogo,
@@ -9,7 +7,7 @@ import {
   ArrowUpRight,
   LinkedinLogo,
   InstagramLogo
-} from "@phosphor-icons/react";
+} from "@phosphor-icons/react/ssr";
 import { Reveal } from "../magic/Reveal";
 
 export function Contact() {

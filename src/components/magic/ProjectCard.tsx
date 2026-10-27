@@ -12,7 +12,8 @@ interface ProjectCardProps {
 
 function monogram(title: string): string {
   return title
-    .split(/[\s.]+/)
+    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+    .split(/[\s._-]+/)
     .filter(Boolean)
     .map((word) => word[0])
     .slice(0, 2)
@@ -25,9 +26,13 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 
   return (
     <motion.article
-      layout
+      layout={!reduce}
       initial={reduce ? {} : { opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0, transition: { delay: index * 0.08 } }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        transition: { delay: reduce ? 0 : index * 0.08 },
+      }}
       exit={reduce ? {} : { opacity: 0 }}
       whileHover={reduce ? {} : { y: -4 }}
       className="group project-card relative flex flex-col overflow-hidden"

@@ -1,17 +1,19 @@
-import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/metadata";
+import { BackLink } from "@/components/layout/BackLink";
 import { ProjectFilter } from "./ProjectFilter";
 
-export const metadata: Metadata = {
-  title: `Proyek | ${SITE.name}`,
+export const metadata = buildPageMetadata({
+  title: "Proyek",
   description: `Kumpulan proyek ${SITE.name} — aplikasi web, desktop, dan mobile beserta teknologi yang dipakai.`,
-  alternates: { canonical: "/proyek" },
-};
+  path: "/proyek",
+});
 
 export default function ProyekPage() {
   return (
     <div className="pt-20 md:pt-24 pb-24 md:pb-32">
       <div className="max-w-6xl mx-auto px-6">
+        <BackLink />
         <div className="mb-12 md:mb-16 flex flex-col gap-2">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted">
             Selected Work

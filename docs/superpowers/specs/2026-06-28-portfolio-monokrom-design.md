@@ -19,7 +19,7 @@ Portfolio developer untuk recruiter technical & freelance client, dengan bahasa 
 | Analytics | Vercel Analytics + Speed Insights |
 | Theme | Dark-only, tanpa toggle |
 | Fonts | next/font (Outfit, DM Sans, JetBrains Mono) |
-| Test | Vitest (`npm test`), data integrity |
+| Test | Vitest (`npm test`), data integrity + aksesibilitas komponen |
 | CI | GitHub Actions: lint → typecheck → test → audit → build |
 
 ## Color Tokens (Apple-like Monochrome, zero accent, dark-only)
@@ -48,9 +48,9 @@ CTA primer menggunakan warna inverted: bg `--color-text-primary`, teks `--color-
 
 Sitemap memuat `/`, `/proyek`, `/cv`, `/privacy` — tanpa fragment `#`.
 
-**Akses antar halaman:** nav dihapus (Sep 2026); link ke `/proyek`, `/cv`, dan
-`/privacy` disediakan lewat `<nav>` di Footer. Halaman baru harus ditambahkan
-ke `pageLinks` di `Footer.tsx` **dan** ke `sitemap.ts`.
+**Akses antar halaman:** nav dihapus (Sep 2026); link ke Beranda, `/proyek`,
+`/cv`, dan `/privacy` disediakan lewat `<nav>` di Footer. Halaman baru harus
+ditambahkan ke `pageLinks` di `FooterNav.tsx` **dan** ke `sitemap.ts`.
 
 ## Homepage Sections
 1. Hero — nama statis (LCP) + role rotator + CTA
@@ -65,11 +65,13 @@ Filter tech hanya ada di `/proyek` (bukan di homepage).
 
 ## Motion
 - Page enter (template): opacity/translateY, 0.35s
-- Scroll reveal: opacity/translateY/blur stagger, 0.55s
+- Scroll reveal: opacity/translateY stagger, 0.55s
 - Hover cards: translateY(-2px s.d. -4px), 0.3s
 - Hover buttons: translate + arrow shift, 0.2–0.3s
 - Active press: scale(0.97), 0.15s
 - prefers-reduced-motion / `useReducedMotionSafe`: collapse to static
+- Lenis smooth scroll di-import dinamis setelah idle; skip link `#main-content`
+  memakai perilaku native dan klik modifier tidak dicegat
 
 ## Data Flow
 - Projects: static array `src/lib/data.ts`

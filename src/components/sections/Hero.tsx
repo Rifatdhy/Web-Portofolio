@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
+import { Pause, Play } from "@phosphor-icons/react";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 
 const roles = ["Web & App Developer", "Network Engineer", "IT Support"];
@@ -10,12 +11,13 @@ const roles = ["Web & App Developer", "Network Engineer", "IT Support"];
 export function Hero() {
   const reduce = useReducedMotionSafe();
   const [roleIdx, setRoleIdx] = useState(0);
+  const [paused, setPaused] = useState(false);
   const { scrollY } = useScroll();
   const glowY = useTransform(scrollY, [0, 700], [0, 140]);
   const glowOpacity = useTransform(scrollY, [0, 700], [0.6, 0]);
 
   useEffect(() => {
-    if (reduce) return;
+    if (reduce || paused) return;
     let id: ReturnType<typeof setInterval> | null = null;
 
     const start = () => {
@@ -40,7 +42,7 @@ export function Hero() {
       stop();
       document.removeEventListener("visibilitychange", onVisibility);
     };
-  }, [reduce]);
+  }, [reduce, paused]);
 
   const nameWords = ["Rifat", "Dhiya", "Ul Lail"];
 
@@ -77,7 +79,18 @@ export function Hero() {
               paragraph below is the LCP element). Only the rotating word
               itself animates. */}
           <div className="mt-6 flex items-center gap-2 font-display text-lg sm:text-2xl text-[var(--color-text-secondary)]">
-            <span className="h-px w-8 bg-[var(--color-border-hover)]" />
+            <span className="hidden h-px w-8 bg-[var(--color-border-hover)] sm:block" />
+            {!reduce && (
+              <button
+                type="button"
+                onClick={() => setPaused((value) => !value)}
+                aria-label={paused ? "Lanjutkan rotasi teks" : "Jeda rotasi teks"}
+                aria-pressed={paused}
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-primary)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text-primary)]"
+              >
+                {paused ? <Play size={14} weight="fill" /> : <Pause size={14} weight="fill" />}
+              </button>
+            )}
             <span className="relative inline-flex h-[1.6em] overflow-hidden">
               {reduce ? (
                 <span className="inline-block whitespace-nowrap font-medium text-[var(--color-text-primary)]">

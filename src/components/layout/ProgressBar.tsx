@@ -19,7 +19,7 @@ export function ProgressBar() {
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={0}
-      aria-label="Scroll progress"
+      aria-label="Progres gulir halaman"
       className="fixed top-0 left-0 h-[2px] z-[60] pointer-events-none"
       style={{ scaleX: scrollYProgress, background: "var(--color-text-primary)" }}
     />

@@ -66,9 +66,9 @@ Hierarki visual dibawa oleh tipografi, spacing, dan kontras — bukan warna.
 
 | Role | Font | Weight | Source |
 |------|------|--------|--------|
-| Display/Headline | Outfit | 400, 500, 600, 700 | Google Fonts (next/font) |
+| Display/Headline | Outfit | 500, 600, 700 | Google Fonts (next/font) |
 | Body | DM Sans | 400, 500, 600, 700 | Google Fonts (next/font) |
-| Mono/Code | JetBrains Mono | 400, 500 | Google Fonts (next/font) |
+| Mono/Code | JetBrains Mono | 400 | Google Fonts (next/font) |
 
 ### Type Scale
 
@@ -152,11 +152,13 @@ Hierarki visual dibawa oleh tipografi, spacing, dan kontras — bukan warna.
 | Page enter (template) | opacity + translateY | 0.35s | `[0.16, 1, 0.3, 1]` |
 | Scroll reveal | opacity + translateY (tanpa blur, agar composited) | 0.55s | `cubic-bezier(0.12,0,0.3,1)` |
 | Hero (H1, role-line, paragraf, tombol: statis demi LCP) | tanpa animasi enter | — | — |
-| Role rotator (kata berputar) | opacity + translateY | 0.4s | `[0.16, 1, 0.3, 1]` |
+| Role rotator (kata berputar) | opacity + translateY, dengan tombol jeda 44px | 0.4s | `[0.16, 1, 0.3, 1]` |
 | Hover card | translateY | 0.3s | `cubic-bezier(0.22, 0.61, 0.36, 1)` |
 | Active press | scale 0.97 | 0.15s | ease |
 
-Semua animasi Motion (`motion/react`) di-guard `useReducedMotionSafe()`; CSS reveal di-guard `prefers-reduced-motion`.
+Semua animasi Motion (`motion/react`) di-guard `useReducedMotionSafe()`; CSS
+reveal, liquid ambient, dan hover transform di-guard `prefers-reduced-motion`.
+Lenis di-import dinamis setelah idle; skip link tetap memakai perilaku native.
 
 ### Pixel-Star Background (`BackgroundPixelStars`)
 - Canvas fixed `z-[1]`, di bawah konten (`main` z-10), `aria-hidden`, `print:hidden`
@@ -171,8 +173,8 @@ Semua animasi Motion (`motion/react`) di-guard `useReducedMotionSafe()`; CSS rev
 
 - WCAG AA contrast minimum (4.5:1 body, 3:1 large text)
 - Focus-visible rings on all interactive elements
-- Skip navigation link ("Loncat ke konten utama")
-- Touch targets minimum 44px (`.btn` min-height 44px)
-- Reduced motion support (`prefers-reduced-motion: reduce`)
+- Skip navigation link ("Loncat ke konten utama", 44px, native behaviour)
+- Touch targets minimum 44px (`.btn`, footer nav links, hero pause control)
+- Reduced motion support (`prefers-reduced-motion: reduce`), termasuk mematikan liquid ambient dan hover transform
 - Semantic HTML: `nav`, `main`, landmark, `role="progressbar"`
-- Print stylesheet
+- Print stylesheet: override token ke palet terang, sembunyikan nav/button/decorative layers

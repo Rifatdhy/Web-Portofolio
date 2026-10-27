@@ -15,7 +15,7 @@ const outfit = Outfit({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
 });
 
 const dmSans = DM_Sans({
@@ -29,7 +29,7 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-mono",
-  weight: ["400", "500"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -37,10 +37,10 @@ export const metadata: Metadata = {
   title: `${SITE.name} | ${SITE.title}`,
   description: SITE.description,
   openGraph: {
-    title: `${SITE.name} | Portfolio`,
+    title: `${SITE.name} | ${SITE.title}`,
     description: SITE.description,
     type: "website",
-    url: SITE.url,
+    url: "/",
   },
   twitter: {
     card: "summary_large_image",
@@ -65,7 +65,10 @@ const jsonLd = {
   name: SITE.name,
   url: SITE.url,
   jobTitle: SITE.title,
-  alumniOf: "Jakarta Global University",
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Jakarta Global University",
+  },
   knowsAbout: [
     "Web Development",
     "Desktop Application Development",
@@ -111,7 +114,7 @@ export default function RootLayout({
       <body className="antialiased flex flex-col min-h-dvh">
         <a
           href="#main-content"
-          className="fixed top-4 left-4 z-[70] px-4 py-2 rounded bg-[var(--color-text-primary)] text-[var(--color-surface)] text-sm font-medium transition-transform duration-300 -translate-y-24 focus:translate-y-0"
+          className="skip-link fixed top-4 left-4 z-[70] inline-flex min-h-11 items-center px-4 py-2 rounded bg-[var(--color-text-primary)] text-[var(--color-surface)] text-sm font-medium transition-transform duration-300 -translate-y-24 focus:translate-y-0"
         >
           Loncat ke konten utama
         </a>
@@ -120,7 +123,9 @@ export default function RootLayout({
         <BackgroundPixelStars />
         <LiquidAmbient />
         <SmoothScroll>
-          <main id="main-content" className="relative z-10">{children}</main>
+          <main id="main-content" tabIndex={-1} className="relative z-10">
+            {children}
+          </main>
           <Footer />
         </SmoothScroll>
         <Analytics />

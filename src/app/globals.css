@@ -321,6 +321,7 @@ html.lenis, html.lenis body {
 .animate-liquid-1 { animation: liquid-morph-1 22s ease-in-out infinite alternate; }
 .animate-liquid-2 { animation: liquid-morph-2 26s ease-in-out infinite alternate; }
 .animate-liquid-3 { animation: liquid-morph-3 24s ease-in-out infinite alternate; }
+html.motion-paused .liquid-orb { animation-play-state: paused; }
 
 /* === BUTTONS === */
 .btn {
@@ -382,7 +383,7 @@ html.lenis, html.lenis body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0.5rem 1.125rem;
   font-size: 0.8125rem;
   font-weight: 500;
@@ -548,16 +549,47 @@ h1, h2, h3 { text-wrap: balance; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .animate-liquid-1, .animate-liquid-2, .animate-liquid-3 { animation: none !important; }
   .scroll-reveal { opacity: 1 !important; transform: none !important; transition: none !important; filter: none !important; }
   .skill-cell { opacity: 1 !important; transform: none !important; }
-  .skill-cell:hover { transform: none; box-shadow: none; }
+  .skill-cell:hover, .skill-cell:active,
+  .edu-card:hover, .project-card:hover, .social-link:hover,
+  .contact-card:hover, .cv-card:hover, .btn:active,
+  .btn:hover .ph-arrow-right, .btn:hover .ph-arrow-up-right {
+    transform: none !important;
+  }
   .skill-cell img, .skill-cell svg { transform: none; }
+  .skill-cell:hover { box-shadow: none; }
   .project-card, .contact-card, .edu-card, .cv-card { box-shadow: none !important; }
 }
 @media print {
-  nav, #progress-bar, .btn, button { display: none !important; }
-  body { background: white !important; color: black !important; font-size: 12pt; }
+  :root {
+    --color-surface: #ffffff;
+    --color-surface-alt: #f5f5f5;
+    --color-surface-card: #ffffff;
+    --color-border: #cccccc;
+    --color-border-hover: #999999;
+    --color-text-primary: #111111;
+    --color-text-secondary: #333333;
+    --color-text-muted: #555555;
+    --color-brand-50: rgba(0, 0, 0, 0.04);
+  }
+  nav, #progress-bar, .btn, button, .skip-link { display: none !important; }
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+    font-size: 12pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
   .scroll-reveal { opacity: 1 !important; transform: none !important; }
   section { break-inside: avoid; }
-  .project-card, .skill-cell, .contact-card, .edu-card { border: 1px solid #CCC !important; }
+  .project-card, .skill-cell, .contact-card, .edu-card, .cv-card {
+    background: #ffffff !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid #cccccc !important;
+    break-inside: avoid;
+  }
 }

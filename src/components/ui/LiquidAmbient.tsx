@@ -1,10 +1,24 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 
 function LiquidAmbientInner() {
   const reduce = useReducedMotionSafe();
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const syncPaused = () => {
+      root.classList.toggle("motion-paused", document.hidden);
+    };
+
+    syncPaused();
+    document.addEventListener("visibilitychange", syncPaused);
+    return () => {
+      document.removeEventListener("visibilitychange", syncPaused);
+      root.classList.remove("motion-paused");
+    };
+  }, []);
 
   return (
     <div

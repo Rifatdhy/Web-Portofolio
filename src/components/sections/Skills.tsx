@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { skillCategories } from "@/lib/data";
 import { Reveal } from "../magic/Reveal";
@@ -54,7 +52,7 @@ export function Skills() {
                       <div key={skill.name} className="skill-cell" style={{ transitionDelay: `${i * 0.06}s` }}>
                         <Image
                             src={`/icons/${skill.slug}.svg`}
-                            alt={skill.name}
+                            alt=""
                             width={28}
                             height={28}
                             className="w-7 h-7"

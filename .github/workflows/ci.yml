@@ -35,7 +35,10 @@ jobs:
         run: npm run test
 
       - name: Dependency audit
-        run: npm audit --audit-level=high
+        # Gate production dependencies. Full `npm audit` is currently clean
+        # too, but keeping --omit=dev avoids a dev-only advisory blocking
+        # deploys; those remain visible through Dependabot.
+        run: npm audit --omit=dev --audit-level=high
 
       - name: Build
         run: npm run build

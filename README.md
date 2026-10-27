@@ -15,7 +15,7 @@ Bahasa Indonesia.
 | Animasi | Motion (`motion/react`), Lenis untuk smooth scroll |
 | Ikon | `@phosphor-icons/react` (SSR variant di server components) |
 | Analytics | Vercel Analytics + Speed Insights |
-| Test | Vitest (integritas data) |
+| Test | Vitest (integritas data + aksesibilitas komponen) |
 
 ## Menjalankan
 
@@ -37,8 +37,12 @@ npm run dev        # http://localhost:3000
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run test` | Vitest |
 
-CI (`.github/workflows/ci.yml`) menjalankan kelima langkah di atas secara
-berurutan pada setiap push dan pull request ke `master`. Semua wajib hijau.
+CI (`.github/workflows/ci.yml`) menjalankan lint, typecheck, test, audit
+dependensi produksi, dan build secara berurutan pada setiap push dan pull
+request ke `master`. Semua wajib hijau. Gate audit memakai `--omit=dev` agar
+advisory dev-only tidak memblokir deploy; `npm audit` penuh saat ini juga bersih
+(0 vulnerability). Override `zod` di `package.json` menjaga rantai tooling
+ESLint tetap memakai versi patch terbaru.
 
 ## Struktur
 
@@ -55,9 +59,9 @@ src/
 │  ├─ layout.tsx         # font, metadata, JSON-LD, background layer
 │  └─ template.tsx       # animasi page-enter
 ├─ components/
-│  ├─ layout/            # Footer, ProgressBar, BackToTop, SmoothScroll
+│  ├─ layout/            # Footer, FooterNav, ProgressBar, BackToTop, BackLink, SmoothScroll
 │  ├─ sections/          # Hero, About, Experience, Projects, Skills, Contact
-│  ├─ magic/             # Reveal, ProjectCard
+│  ├─ magic/             # Reveal, ProjectCard, StatNum
 │  └─ ui/                # BackgroundPixelStars, LiquidAmbient
 └─ lib/
    ├─ constants.ts       # SITE, SOCIAL (URL, kontak, path CV)
@@ -78,7 +82,7 @@ gagal kalau:
 Jadi tambahkan juga file SVG ikonnya, dan pastikan `allTechs` ikut diperbarui.
 
 **Halaman baru** — tambahkan ke `pageLinks` di
-`src/components/layout/Footer.tsx` **dan** ke `src/app/sitemap.ts`. Nav dihapus
+`src/components/layout/FooterNav.tsx` **dan** ke `src/app/sitemap.ts`. Nav dihapus
 pada Sep 2026; footer adalah satu-satunya jalur navigasi antar halaman.
 
 **Tanggal `lastmod` sitemap** sengaja tidak diisi — lihat komentar di
@@ -115,8 +119,12 @@ mendukung versi barunya.
 - **Dark-only, zero accent color.** Hierarki dibawa tipografi, spacing, dan
   kontras. Detail lengkap di [`brand-guidelines.md`](brand-guidelines.md).
 - **Reduced motion.** Animasi Motion selalu di-guard
-  `useReducedMotionSafe()`; CSS reveal di-guard `prefers-reduced-motion`.
-  Tidak ada animasi loop abadi pada elemen UI — hanya dua layer background.
+  `useReducedMotionSafe()`; CSS reveal, liquid ambient, dan hover transform
+  di-guard `prefers-reduced-motion`. Tidak ada animasi loop abadi pada elemen
+  UI — hanya dua layer background.
+- **Smooth scroll.** Lenis di-import dinamis setelah browser idle. Skip link
+  `#main-content` tidak dicegat; klik modifier dan non-primary button juga
+  dibiarkan native.
 - **Ikon di server component** pakai `@phosphor-icons/react/ssr`.
 - **Domain produksi** ada di `SITE.url`. Harus host yang benar-benar melayani
   `200` — apex `rifatdhy.my.id` redirect 308 ke `www`, dan scraper tidak
