@@ -26,6 +26,22 @@ test("home renders the primary content, imagery, and hash focus", async ({
   await expect(page.locator("#proyek")).toBeFocused();
 });
 
+test("project cards link to static case studies and unknown slugs return 404", async ({
+  page,
+}) => {
+  await page.goto("/proyek");
+  await page.locator("#daftar-proyek article").first().getByRole("link", { name: "Clash.Soccer", exact: true }).click();
+
+  await expect(page).toHaveURL(/\/proyek\/clash-soccer$/);
+  await expect(page.getByRole("heading", { level: 1, name: "Clash.Soccer" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Ringkasan proyek." })).toBeVisible();
+  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", /Clash\.Soccer/);
+
+  const response = await page.goto("/proyek/does-not-exist");
+  expect(response?.status()).toBe(404);
+  await expect(page.getByRole("heading", { level: 1, name: "Halaman tidak ditemukan" })).toBeVisible();
+});
+
 test.describe("URL-synced project filters", () => {
   test("deep links, filter clicks, and history all stay in sync", async ({
     page,
@@ -95,5 +111,13 @@ test.describe("mobile layout", () => {
         false,
       );
     }
+  });
+
+  test("project detail does not overflow horizontally", async ({ page }) => {
+    await page.goto("/proyek/clash-soccer");
+    const hasHorizontalOverflow = await page.evaluate(
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
+    );
+    expect(hasHorizontalOverflow).toBe(false);
   });
 });
