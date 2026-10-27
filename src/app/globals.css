@@ -95,10 +95,7 @@ html.lenis, html.lenis body {
 }
 
 /* === BADGE / TAG (neutral) === */
-.pastel-red,
-.pastel-blue,
-.pastel-green,
-.pastel-yellow {
+.badge-category {
   background: var(--color-brand-50);
   color: var(--color-text-secondary);
 }

@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion, useScroll, useTransform } from "motion/react";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
+import { SITE } from "@/lib/constants";
 
 const roles = [
-  "Software Enthusiast",
-  "Network Enthusiast",
-  "IT Support Enthusiast",
+  "Web & App Developer",
+  "Network Engineer",
+  "IT Support",
 ];
 
 export function Hero() {
@@ -19,13 +20,12 @@ export function Hero() {
   const glowOpacity = useTransform(scrollY, [0, 700], [0.6, 0]);
 
   useEffect(() => {
-    // The role rotator intentionally keeps running even when the OS asks for
-    // reduced motion — the owner wants the three interests to stay visible.
+    if (reduce) return;
     let id: ReturnType<typeof setInterval> | null = null;
 
     const start = () => {
       if (id === null) {
-        id = setInterval(() => setRoleIdx((i) => (i + 1) % roles.length), 1000);
+        id = setInterval(() => setRoleIdx((i) => (i + 1) % roles.length), 2600);
       }
     };
     const stop = () => {
@@ -45,7 +45,7 @@ export function Hero() {
       stop();
       document.removeEventListener("visibilitychange", onVisibility);
     };
-  }, []);
+  }, [reduce]);
 
   const nameWords = ["Rifat", "Dhiya", "Ul Lail"];
 
@@ -84,18 +84,24 @@ export function Hero() {
           <div className="mt-6 flex items-center gap-2 font-display text-lg sm:text-2xl text-[var(--color-text-secondary)]">
             <span className="hidden h-px w-8 bg-[var(--color-border-hover)] sm:block" />
             <span className="relative inline-flex h-[1.6em] overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={roles[roleIdx]}
-                  className="inline-block whitespace-nowrap font-medium text-[var(--color-text-primary)]"
-                  initial={{ opacity: 0, y: "80%" }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: "-80%" }}
-                  transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  {roles[roleIdx]}
-                </motion.span>
-              </AnimatePresence>
+              {reduce ? (
+                <span className="inline-block whitespace-nowrap font-medium text-[var(--color-text-primary)]">
+                  {roles[0]}
+                </span>
+              ) : (
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={roles[roleIdx]}
+                    className="inline-block whitespace-nowrap font-medium text-[var(--color-text-primary)]"
+                    initial={{ opacity: 0, y: "80%" }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: "-80%" }}
+                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    {roles[roleIdx]}
+                  </motion.span>
+                </AnimatePresence>
+              )}
             </span>
           </div>
 
@@ -113,6 +119,9 @@ export function Hero() {
             <Link href="/#kontak" className="btn btn-outline">
               Hubungi Saya
             </Link>
+            <a href={SITE.cvPath} download className="btn btn-outline">
+              Lihat CV
+            </a>
           </div>
         </div>
       </div>

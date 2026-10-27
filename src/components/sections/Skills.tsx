@@ -3,13 +3,6 @@ import { skillCategories } from "@/lib/data";
 import { Reveal } from "../magic/Reveal";
 
 export function Skills() {
-  const pastelColors = [
-    "pastel-blue",
-    "pastel-green",
-    "pastel-yellow",
-    "pastel-red",
-  ];
-
   const colMap: Record<number, string> = {
     2: "sm:grid-cols-2",
     3: "sm:grid-cols-3",
@@ -37,14 +30,13 @@ export function Skills() {
 
         <div className="grid md:grid-cols-2 gap-4 md:gap-5">
           {skillCategories.map((cat, catIdx) => {
-            const pastelClass = pastelColors[catIdx] || "pastel-blue";
             return (
               <Reveal
                 key={cat.name}
                 style={{ transitionDelay: `${catIdx * 0.08}s` }}
               >
                 <div>
-                  <div className={`badge ${pastelClass} mb-4`}>
+                  <div className="badge badge-category mb-4">
                     {cat.name}
                   </div>
                   <div className={`grid grid-cols-2 gap-3 ${colsFor(cat.skills.length)}`}>

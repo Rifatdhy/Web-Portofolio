@@ -12,4 +12,11 @@ describe("Skills accessibility", () => {
       expect(tag).toContain('alt=""');
     }
   });
+
+  it("uses neutral category styling instead of stale pastel names", () => {
+    const html = renderToStaticMarkup(<Skills />);
+
+    expect(html).toContain("badge-category");
+    expect(html).not.toContain("pastel-");
+  });
 });

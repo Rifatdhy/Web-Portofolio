@@ -1,4 +1,4 @@
-import { aboutParagraphs, education } from "@/lib/data";
+import { aboutParagraphs, education, projects } from "@/lib/data";
 import { SITE } from "@/lib/constants";
 import { Reveal } from "../magic/Reveal";
 import { StatNum } from "../magic/StatNum";
@@ -6,7 +6,7 @@ import { StatNum } from "../magic/StatNum";
 export function About() {
   const items = [
     { num: "2+", label: "Tahun Eksplorasi Web" },
-    { num: "5", label: "Proyek Publik" },
+    { num: `${projects.length}`, label: "Proyek Publik" },
     { num: "S1", label: "Teknik Informatika" },
   ];
 
