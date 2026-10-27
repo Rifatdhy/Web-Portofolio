@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { existsSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
-import { allTechs, projects, skillCategories } from "./data";
+import { allTechs, getProjectBySlug, projects, skillCategories } from "./data";
 import { SITE } from "./constants";
 
 const iconsDir = resolve(process.cwd(), "public", "icons");
@@ -32,6 +32,15 @@ describe("data integrity", () => {
         expect(p.demo).toMatch(/^https?:\/\//);
       }
     }
+  });
+
+  it("projects have unique URL-safe slugs and resolve by slug", () => {
+    const slugs = projects.map((project) => project.slug);
+
+    expect(slugs.every((slug) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug))).toBe(true);
+    expect(new Set(slugs).size).toBe(slugs.length);
+    expect(getProjectBySlug("clash-soccer")?.title).toBe("Clash.Soccer");
+    expect(getProjectBySlug("does-not-exist")).toBeUndefined();
   });
 
   it("configured project images exist in public/", () => {

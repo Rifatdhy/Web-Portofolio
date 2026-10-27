@@ -1,12 +1,21 @@
 export interface Project {
   title: string;
+  slug: string;
   description: string;
   href: string;
   techs: string[];
   demo?: string;
   /** Local preview artwork served from `public/`. */
   image?: string;
+  contribution?: string;
+  year?: string;
+  status?: ProjectStatus;
+  challenge?: string;
+  solution?: string;
+  highlights?: string[];
 }
+
+export type ProjectStatus = "Selesai" | "Eksperimen" | "Aktif";
 
 export interface Education {
   school: string;
@@ -94,41 +103,60 @@ export const experiences: Experience[] = [
 export const projects: Project[] = [
   {
     title: "Clash.Soccer",
+    slug: "clash-soccer",
     description: "Website berita sepak bola responsif dengan komponen UI reusable, dicapai menggunakan React.js dan Tailwind CSS untuk desktop maupun mobile-first.",
     href: "https://github.com/Rifatdhy/Clash-Soccer",
     demo: "https://clash-soccer.vercel.app",
     techs: ["React", "TailwindCSS", "JavaScript"],
     image: "/projects/clash-soccer.png",
+    contribution: "Membangun antarmuka responsif dengan komponen UI reusable menggunakan React.js dan Tailwind CSS.",
+    status: "Selesai",
   },
   {
     title: "ECO RANGERS",
+    slug: "eco-rangers",
     description: "Aplikasi web tentang kesadaran lingkungan dan gaya hidup berkelanjutan dengan fitur inti dibangun menggunakan PHP dan MySQL serta antarmuka responsif.",
     href: "https://github.com/Rifatdhy/ECO-RANGERS",
     techs: ["PHP", "MySQL", "HTML5", "CSS", "JavaScript"],
     image: "/projects/eco-rangers.png",
+    contribution: "Mengembangkan fitur inti aplikasi web dan antarmuka responsif menggunakan PHP, MySQL, HTML, CSS, dan JavaScript.",
+    status: "Selesai",
   },
   {
     title: "FINN BUDDY",
+    slug: "finn-buddy",
     description: "Aplikasi mobile cross-platform yang dibangun dengan Flutter dan Dart, dengan komponen UI reusable, layout responsif untuk berbagai ukuran layar, dan navigasi yang intuitif.",
     href: "https://github.com/Rifatdhy/FINN-BUDDY",
     techs: ["Flutter", "Dart"],
     image: "/projects/finn-buddy.png",
+    contribution: "Membangun aplikasi mobile cross-platform dengan komponen UI reusable, layout responsif, dan navigasi intuitif.",
+    status: "Selesai",
   },
   {
     title: "NodeVault",
+    slug: "nodevault",
     description: "P2P file sharing dan music streaming terdesentralisasi. Setiap laptop menjadi peer yang menyimpan filenya sendiri. Backend Java SE, frontend vanilla HTML/CSS/JS.",
     href: "https://github.com/Rifatdhy/NodeVault",
     techs: ["Java", "HTML5", "CSS", "JavaScript"],
     image: "/projects/nodevault.png",
+    contribution: "Mengembangkan konsep P2P file sharing dan music streaming dengan backend Java SE serta frontend vanilla web.",
+    status: "Eksperimen",
   },
   {
     title: "TODO-List",
+    slug: "todo-list",
     description: "Aplikasi pencatat tugas harian berbasis web, dibangun dengan React, TypeScript, Vite, dan Tailwind CSS.",
     href: "https://github.com/Rifatdhy/TODO-List",
     techs: ["React", "TypeScript", "Vite", "TailwindCSS"],
     image: "/projects/todo-list.png",
+    contribution: "Membangun aplikasi pencatat tugas dengan React, TypeScript, Vite, dan Tailwind CSS.",
+    status: "Selesai",
   },
 ];
+
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((project) => project.slug === slug);
+}
 
 export const allTechs = [
   "HTML5",
