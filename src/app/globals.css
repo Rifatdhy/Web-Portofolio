@@ -175,8 +175,6 @@ html.lenis, html.lenis body {
 /* === SKILL CELLS === */
 .skill-cell {
   background: rgba(28, 28, 30, 0.72);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04),
               0 8px 24px -10px rgba(0, 0, 0, 0.7);
@@ -211,7 +209,6 @@ html.lenis, html.lenis body {
   object-fit: contain;
   opacity: 1;
   transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.2s ease;
-  will-change: transform;
 }
 .skill-cell:hover img, .skill-cell:hover svg {
   transform: scale(1.1);
@@ -232,8 +229,6 @@ html.lenis, html.lenis body {
   height: 2.75rem;
   border-radius: 999px;
   background: rgba(28, 28, 30, 0.8);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04),
               0 8px 20px -8px rgba(0, 0, 0, 0.7);
@@ -288,9 +283,8 @@ html.lenis, html.lenis body {
 
 /* === LIQUID GLASS AMBIENT BLOBS === */
 .liquid-orb {
-  filter: blur(100px);
-  opacity: 0.5;
-  will-change: transform, border-radius;
+  filter: blur(24px);
+  opacity: 0.65;
   pointer-events: none;
 }
 .liquid-orb-1 {
@@ -304,36 +298,18 @@ html.lenis, html.lenis body {
 }
 
 @keyframes liquid-morph-1 {
-  0%, 100% {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    transform: translate(-50%, 0) rotate(0deg) scale(1);
-  }
-  50% {
-    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-    transform: translate(-45%, 35px) rotate(180deg) scale(1.08);
-  }
+  0%, 100% { transform: translate(-50%, 0) rotate(0deg) scale(1); }
+  50% { transform: translate(-45%, 35px) rotate(180deg) scale(1.08); }
 }
 
 @keyframes liquid-morph-2 {
-  0%, 100% {
-    border-radius: 50% 50% 35% 65% / 40% 60% 40% 60%;
-    transform: translate(25%, 0) rotate(0deg) scale(1);
-  }
-  50% {
-    border-radius: 65% 35% 55% 45% / 60% 40% 60% 40%;
-    transform: translate(20%, -40px) rotate(-180deg) scale(1.05);
-  }
+  0%, 100% { transform: translate(25%, 0) rotate(0deg) scale(1); }
+  50% { transform: translate(20%, -40px) rotate(-180deg) scale(1.05); }
 }
 
 @keyframes liquid-morph-3 {
-  0%, 100% {
-    border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
-    transform: translate(-33%, 0) rotate(0deg) scale(1);
-  }
-  50% {
-    border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%;
-    transform: translate(-38%, -30px) rotate(180deg) scale(1.1);
-  }
+  0%, 100% { transform: translate(-33%, 0) rotate(0deg) scale(1); }
+  50% { transform: translate(-38%, -30px) rotate(180deg) scale(1.1); }
 }
 
 .animate-liquid-1 { animation: liquid-morph-1 22s ease-in-out infinite alternate; }
@@ -393,8 +369,6 @@ html.motion-paused .liquid-orb { animation-play-state: paused; }
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.06);
   color: var(--color-text-secondary);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 /* === FILTER PILL BUTTONS === */
@@ -413,8 +387,6 @@ html.motion-paused .liquid-orb { animation-play-state: paused; }
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(28, 28, 30, 0.8);
   color: var(--color-text-primary);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
   transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
@@ -474,7 +446,6 @@ html.motion-paused .liquid-orb { animation-play-state: paused; }
 .scroll-reveal {
   opacity: 0;
   transform: translateY(16px);
-  will-change: opacity, transform;
   transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
