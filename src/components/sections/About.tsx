@@ -33,7 +33,7 @@ export function About() {
           </div>
           <div className="md:col-span-7">
             <Reveal>
-              <div className="grid grid-cols-3 divide-x divide-[var(--color-border)] border-y border-[var(--color-border)] py-8 mb-12">
+              <div className="grid grid-cols-3 py-8 mb-12">
                 {items.map((stat) => (
                   <div key={stat.label} className="px-4 first:pl-0">
                     <StatNum value={stat.num} />
@@ -69,7 +69,6 @@ export function About() {
               <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight">
                 Pendidikan.
               </h3>
-              <div className="section-divider" />
             </Reveal>
           </div>
           <div className="md:col-span-7">
@@ -77,7 +76,7 @@ export function About() {
               {education.map((edu) => (
                 <Reveal key={edu.school} className="edu-item">
                   <div className="edu-dot" />
-                  <div className="edu-card">
+                  <div className="edu-card glass-surface">
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <h4 className="font-display text-lg font-bold">

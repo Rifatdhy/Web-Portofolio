@@ -37,14 +37,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       }}
       exit={reduce ? {} : { opacity: 0 }}
       whileHover={reduce ? {} : { y: -4 }}
-      className="group project-card relative flex flex-col overflow-hidden"
+      className="group project-card glass-surface relative flex flex-col overflow-hidden"
     >
       {/* Liquid glass top specular highlight overlay */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -inset-px z-10 rounded-[20px] bg-gradient-to-b from-white/[0.08] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-px z-10 rounded-[16px] bg-gradient-to-b from-white/[0.08] via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
       />
-      <div className="relative aspect-video overflow-hidden border-b border-white/10 bg-[var(--color-surface)]">
+      <div className="project-card-media relative aspect-video overflow-hidden bg-[var(--color-surface)]">
         {project.image ? (
           <>
             <Image
@@ -70,7 +70,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           </div>
         )}
       </div>
-      <div className="flex grow flex-col gap-4 p-6 md:p-8">
+      <div className="project-card-body flex grow flex-col gap-4 p-6 md:p-8">
         <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight leading-tight">
           <Link href={`/proyek/${project.slug}`} className="transition-colors hover:text-[var(--color-text-secondary)]">
             {project.title}

@@ -62,7 +62,7 @@ export function ProjectFilter() {
             onClick={() => setActive(f)}
             aria-pressed={active === f}
             aria-controls="daftar-proyek"
-            className={`filter-pill ${active === f ? "active" : ""}`}
+            className={`filter-pill glass-surface ${active === f ? "active" : ""}`}
           >
             {f}
           </button>

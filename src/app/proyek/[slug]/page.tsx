@@ -83,7 +83,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           <div className="grid md:grid-cols-12 gap-10 md:gap-16">
             <div className="md:col-span-4">
               <h2 className="font-display text-2xl font-bold">Ringkasan proyek.</h2>
-              <div className="section-divider" />
             </div>
             <div className="md:col-span-8 space-y-8">
               {project.contribution && (
@@ -134,7 +133,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </div>
           <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(projectJsonLd(project)).replace(/</g, "\\u003c") }} />
         </article>
-        <div className="mt-16 pt-8 border-t border-[var(--color-border)]">
+        <div className="mt-16 pt-8">
           <Link href="/proyek" className="text-sm text-secondary hover:text-[var(--color-text-primary)] transition-colors">
             Lihat semua proyek
           </Link>

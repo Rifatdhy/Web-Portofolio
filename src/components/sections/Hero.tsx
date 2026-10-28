@@ -52,7 +52,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative text-[var(--color-text-primary)] min-h-[100dvh] pt-20 flex flex-col justify-center overflow-hidden"
+      className="hero-performance relative text-[var(--color-text-primary)] min-h-[100dvh] pt-20 flex flex-col justify-center overflow-hidden"
     >
       {/* Decorative parallax glow */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
@@ -78,11 +78,8 @@ export function Hero() {
             ))}
           </h1>
 
-          {/* The wrapper is static; only the rotating word animates. The
-              rotation is intentionally not gated by reduced-motion because
-              the owner wants all three interests to remain visible. */}
+          {/* The wrapper is static; only the rotating word animates. */}
           <div className="mt-6 flex items-center gap-2 font-display text-lg sm:text-2xl text-[var(--color-text-secondary)]">
-            <span className="hidden h-px w-8 bg-[var(--color-border-hover)] sm:block" />
             <span className="relative inline-flex h-[1.6em] overflow-hidden">
               {reduce ? (
                 <span className="inline-block whitespace-nowrap font-medium text-[var(--color-text-primary)]">

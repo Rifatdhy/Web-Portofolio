@@ -36,7 +36,7 @@ export default function CVPage() {
             border: "1px solid var(--color-border)",
           }}
         >
-          <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 pb-8" style={{ borderBottom: "1px solid var(--color-border)" }}>
+          <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
             <div>
               <h2 className="font-display text-2xl md:text-3xl font-bold">
                 {SITE.name}
@@ -70,7 +70,7 @@ export default function CVPage() {
                     ? "CV Rifat Dhiya Ul Lail.pdf"
                     : undefined
                 }
-                className="cv-card"
+                className="cv-card glass-surface"
               >
                 <div className="flex items-center gap-3">
                   {item.icon}

@@ -11,7 +11,6 @@ export function Experience() {
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance">
                 Pengalaman.
               </h2>
-              <div className="section-divider" />
               <p
                 className="text-sm mt-6 leading-relaxed font-mono"
                 style={{ color: "var(--color-text-secondary)" }}
@@ -27,7 +26,7 @@ export function Experience() {
               {experiences.map((exp) => (
                 <Reveal key={exp.company} className="edu-item">
                   <div className="edu-dot" />
-                  <div className="edu-card">
+                  <div className="edu-card glass-surface">
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <h3 className="font-display text-lg font-bold">

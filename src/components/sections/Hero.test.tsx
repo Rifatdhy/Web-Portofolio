@@ -10,4 +10,11 @@ describe("Hero", () => {
     expect(html).toContain("Lihat CV");
     expect(html).toContain("/assets/CV%20Rifat%20Dhiya%20Ul%20Lail.pdf");
   });
+
+  it("uses the performance hero treatment", () => {
+    const html = renderToStaticMarkup(<Hero />);
+
+    expect(html).toContain("hero-performance");
+    expect(html).not.toContain("hero-rule");
+  });
 });

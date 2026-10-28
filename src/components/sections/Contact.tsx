@@ -12,14 +12,10 @@ import { Reveal } from "../magic/Reveal";
 
 export function Contact() {
   return (
-    <section id="kontak" className="relative py-28 md:py-32">
+    <section id="kontak" className="contact-statement relative py-28 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
         <Reveal>
           <div className="max-w-2xl mx-auto text-center">
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-muted inline-flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-current" />
-              Tersedia untuk diskusi
-            </span>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-balance leading-tight mt-4">
               Ada proyek atau ide?
             </h2>
@@ -40,7 +36,7 @@ export function Contact() {
                 href={SOCIAL.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group contact-card"
+                className="group contact-card glass-surface"
               >
                 <div className="icon-box">
                   <WhatsappLogo
@@ -70,7 +66,7 @@ export function Contact() {
                 href={SITE.emailCompose}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group contact-card"
+                className="group contact-card glass-surface"
               >
                 <div className="icon-box">
                   <Envelope
@@ -99,7 +95,7 @@ export function Contact() {
               <a
                 href={SITE.cvPath}
                 download
-                className="group contact-card"
+                className="group contact-card glass-surface"
               >
                 <div className="icon-box">
                   <DownloadSimple
@@ -128,7 +124,7 @@ export function Contact() {
                 href={SOCIAL.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group contact-card"
+                className="group contact-card glass-surface"
               >
                 <div className="icon-box">
                   <GithubLogo
